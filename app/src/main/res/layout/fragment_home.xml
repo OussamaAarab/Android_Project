@@ -1,11 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Home"
+    android:padding="15dp"
+    android:orientation="vertical"
     android:background="@drawable/gradient_background">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/cinema1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/cinema"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/logo_tickets_home"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/logo_tickets" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/cinema2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="10dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/cinema"
+            tools:ignore="MissingConstraints" />
+
+
+
+    </LinearLayout>
+
 
 
     <TextView
@@ -13,6 +56,8 @@
         android:layout_height="wrap_content"
         android:text="Home Fragment"
         android:textSize="30dp"
-        android:layout_centerInParent="true"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp"
+        />
 
-</RelativeLayout>
+</LinearLayout>
