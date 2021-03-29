@@ -21,12 +21,37 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
+    View v ;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_home, container, false);
+        v =  inflater.inflate(R.layout.fragment_home, container, false);
         
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("Aabane","On resume");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    API_Movie api_movie = API_Factory.getInstance(v.getContext()).getAPI_Movie();
+                    Movie m = api_movie.findMovie(500,"fr",null);
+                    Log.d(getClass().getName(),m.getOverview());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }
