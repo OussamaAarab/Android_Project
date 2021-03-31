@@ -125,9 +125,9 @@ public class Movie {
             spoken_languages = new Language[size];
             for(JsonElement spkelm : spk_lng){
                 Language lng = new Language();
-                lng.setEnglish_name(spk_lng.getAsJsonObject().get("english_name").getAsString());
-                lng.setName(spk_lng.getAsJsonObject().get("name").getAsString());
-                lng.setIso_639_1(spk_lng.getAsJsonObject().get("iso_639_1").getAsString());
+                lng.setEnglish_name(spkelm.getAsJsonObject().get("english_name").getAsString());
+                lng.setName(spkelm.getAsJsonObject().get("name").getAsString());
+                lng.setIso_639_1(spkelm.getAsJsonObject().get("iso_639_1").getAsString());
                 spoken_languages[i] = lng;
                 i++;
             }

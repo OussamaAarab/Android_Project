@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HomeFragment extends Fragment {
+    View v ;
 
     RecyclerView recyclerPopularMovies;
     RecyclerView recyclerPopularSeries;
