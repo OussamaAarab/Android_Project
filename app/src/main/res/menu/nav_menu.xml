@@ -17,11 +17,6 @@
         android:icon="@drawable/ic_baseline_ondemand_video_24"
         android:title="Video"/>
     <item
-        android:id="@+id/nav_video_"
-
-        android:icon="@drawable/ic_baseline_ondemand_video_24"
-        android:title="Video"/>
-    <item
         android:id="@+id/nav_profil"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Profil"/>

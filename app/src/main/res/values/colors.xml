@@ -12,4 +12,5 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="gris">#404141</color>
+    <color name="gold">#FFD700</color>
 </resources>
