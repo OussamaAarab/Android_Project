@@ -50,6 +50,7 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
         Picasso.get().load(linkImage).into(holder.image);
         holder.title.setText(movie.getTitle());
         holder.desc.setText(movie.getOverview());
+        holder.vote.setText(movie.getVote_count());
 
     }
 
@@ -61,7 +62,7 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
     public static class FeaturedViewHolder extends RecyclerView.ViewHolder{
 
         ImageView image;
-        TextView title,desc;
+        TextView title,desc,vote;
 
         public FeaturedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +70,7 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
             image = itemView.findViewById(R.id.card_image);
             title = itemView.findViewById(R.id.card_title);
             desc = itemView.findViewById(R.id.card_desc);
+            vote = itemView.findViewById(R.id.card_vote);
         }
     }
 
