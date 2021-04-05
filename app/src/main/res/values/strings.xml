@@ -3,4 +3,8 @@
     <string name="slogan">Discover your favorite movies</string>
     <string name="day_trending_notif_title">Today\'s trendings</string>
     <string name="day_trending_notif_dsc">Take a look on today\'s trendings</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="popular_series">Popular Series</string>
+    <string name="show_more">Show more</string>
+
 </resources>

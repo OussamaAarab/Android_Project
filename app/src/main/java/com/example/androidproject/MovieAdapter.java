@@ -39,9 +39,9 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imMovie=itemView.findViewById(R.id.imMovie);
+            imMovie=itemView.findViewById(R.id.movie_search_image);
             title=itemView.findViewById(R.id.title);
-            description=itemView.findViewById(R.id.description);
+            description=itemView.findViewById(R.id.movie_search_desc);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -54,7 +54,7 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
     @NonNull
     @Override
     public MovieAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.list_movie,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_search,parent,false);
         return new ViewHolder(view);
     }
 
