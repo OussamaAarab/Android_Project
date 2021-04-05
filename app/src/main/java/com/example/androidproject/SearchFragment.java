@@ -38,9 +38,9 @@ public class SearchFragment extends Fragment {
     Handler handlerMovie;
 
 
-    public SearchFragment() {
+    public SearchFragment(){
     }
-    public SearchFragment(ArrayList<Movie> movies) {
+    public SearchFragment(ArrayList<Movie> movies)  {
         this.movies = movies;
     }
 
