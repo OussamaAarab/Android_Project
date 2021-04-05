@@ -153,6 +153,10 @@ public class Movie {
 
     }
 
+    public Movie() {
+
+    }
+
 
     //getters
     public int getId() {

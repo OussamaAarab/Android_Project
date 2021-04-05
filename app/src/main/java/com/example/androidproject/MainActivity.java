@@ -1,15 +1,28 @@
 package com.example.androidproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SyncAdapterType;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.beans.Movie;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     TextView slogan,text_bottom;
     Animation logo_anim,slogan_anim;
     private static int SPLASH_SCREEN = 10500;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

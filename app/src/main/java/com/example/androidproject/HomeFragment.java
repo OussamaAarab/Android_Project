@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-    @Override
+    /*@Override
     public void onStart() {
         super.onStart();
         Log.d("Aabane","On resume");
@@ -53,5 +53,25 @@ public class HomeFragment extends Fragment {
                 }
             }
         }).start();
+    }*/
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("Asmaa","On resume");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    API_Movie api_movie = API_Factory.getInstance(v.getContext()).getAPI_Movie();
+                    Movie m = api_movie.findLatestMovies();
+                    Log.d(getClass().getName(),m.getOverview());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
+
+
 }

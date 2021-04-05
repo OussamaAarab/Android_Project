@@ -20,6 +20,7 @@ public class API_Movie {
     private static final String Search = "https://api.themoviedb.org/3/search/movie";
     private static final String Trending_Movies = "https://api.themoviedb.org/3/trending/movie/";
     private static final String  Movie_Details = "https://api.themoviedb.org/3/movie/";
+    private static final String  Latest_Movies = "https://api.themoviedb.org/3/movie/latest";
 
     public API_Movie(API_Factory factory){ this.factory = factory;}
 
@@ -97,5 +98,30 @@ public class API_Movie {
         JsonObject entity = gson.fromJson(resp, JsonObject.class);
         movie = new Movie(entity);
         return movie;
+    }
+
+    public ArrayList<Movie> findLatestMovies(String time_window) throws IOException {
+        ArrayList<Movie> movies = new ArrayList<>();
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(Latest_Movies).newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        String url = builder.build().toString();
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+
+        JsonArray array = entity.getAsJsonArray("results");
+        for(JsonElement o : array ){
+            Movie m = new Movie(o.getAsJsonObject());
+            movies.add(m);
+        }
+        return movies;
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.androidproject;
+/*package com.example.androidproject;
 
 import android.content.Context;
 import android.net.Uri;
@@ -75,4 +75,4 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
         return movies.size();
     }
 
-}
+}*/
