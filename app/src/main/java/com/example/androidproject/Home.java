@@ -36,7 +36,11 @@ public class Home extends AppCompatActivity {
                             selectedFragment = new HomeFragment();
                             break;
                         case R.id.nav_search:
-                            selectedFragment = new SearchFragment();
+                            try {
+                                selectedFragment = new SearchFragment();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             Log.i("Search","Clique sur le boutton search");
                             break;
                         case R.id.nav_video:
