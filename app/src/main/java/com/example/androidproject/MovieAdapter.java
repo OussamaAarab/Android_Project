@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.beans.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.net.URL;
@@ -59,6 +60,7 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, int position) {
+        /*
         String s=movies.get(position).getYear()+" "+movies.get(position).getType();
 
         holder.itemView.setTag(movies.get(position));
@@ -67,6 +69,8 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
                 .into(holder.imMovie);
         holder.title.setText(movies.get(position).getTitle());
         holder.description.setText(s);
+        */
+
     }
 
     @Override

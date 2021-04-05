@@ -19,7 +19,7 @@ public class API_Factory {
     public static API_Factory getInstance(Context context) throws Exception {
         if(factory==null){
             AssetManager manager =  context.getAssets();
-            InputStream in = manager.open("Api_config.properties") ;
+            InputStream in = manager.open("config/Api_config.properties") ;
             if(in==null) throw new Exception("Properties file not found");
 
             Properties properties = new Properties();
