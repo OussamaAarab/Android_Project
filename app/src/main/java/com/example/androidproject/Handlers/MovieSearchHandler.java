@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StyleableRes;
 
 import com.example.androidproject.HomeFragment;
 import com.example.androidproject.SearchFragment;
@@ -23,7 +24,10 @@ public class MovieSearchHandler extends Handler {
             HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
             MovieSearchAdapter adapter = (MovieSearchAdapter) objMovie.get("MovieSearchAdapter");
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MovieSearch");
+            String requestedMovie = (String) objMovie.get("requestedMovie");
             adapter.SetData(movies);
+            adapter.setRequestedMovie(requestedMovie);
+
         }
 
 

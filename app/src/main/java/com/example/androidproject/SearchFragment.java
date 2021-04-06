@@ -74,12 +74,13 @@ public class SearchFragment extends Fragment {
                          try {
                              API_Factory factory = API_Factory.getInstance(view.getContext());
                              API_Movie api_movie = factory.getAPI_Movie();
-                             movies = api_movie.Search_Movie(query,"en-US",1);
+                             movies = api_movie.Search_Movie(query,1);
                              message = new Message();
                              message.arg1 = MSG_START;
                              HashMap<String,Object> objects = new HashMap<>();
                              objects.put("MovieSearch",movies);
                              objects.put("MovieSearchAdapter",adapter);
+                             objects.put("requestedMovie",query);
                              message.obj = objects;
                              handlerMovie.sendMessage(message);
                          } catch (Exception e) {
@@ -104,12 +105,13 @@ public class SearchFragment extends Fragment {
                          try {
                              API_Factory factory = API_Factory.getInstance(view.getContext());
                              API_Movie api_movie = factory.getAPI_Movie();
-                             movies = api_movie.Search_Movie(newText,"en-US",1);
+                             movies = api_movie.Search_Movie(newText,1);
                              message = new Message();
                              message.arg1 = MSG_START;
                              HashMap<String,Object> objects = new HashMap<>();
                              objects.put("MovieSearch",movies);
                              objects.put("MovieSearchAdapter",adapter);
+                             objects.put("requestedMovie",newText);
                              message.obj = objects;
                              handlerMovie.sendMessage(message);
                          } catch (Exception e) {

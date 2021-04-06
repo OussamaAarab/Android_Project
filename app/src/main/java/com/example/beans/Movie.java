@@ -49,7 +49,7 @@ public class Movie {
         }
         try {
 
-            JsonArray grs = o.get("grenres").getAsJsonArray();
+            JsonArray grs = o.get("genres").getAsJsonArray();
             size = grs.size();
             this.genres = new Genre[size];
             i=0;

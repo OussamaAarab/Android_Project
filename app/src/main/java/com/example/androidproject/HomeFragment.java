@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment {
                     message.arg1 = MSG_LOAD;
                     API_Factory factory = API_Factory.getInstance(v.getContext());
                     API_Movie movie = factory.getAPI_Movie();
-                    movies = movie.Search_Movie("Big mamma","en-US",1);
+                    movies = movie.Search_Movie("Big mamma",1);
                     message = new Message();
                     message.arg1 = MSG_START;
                     HashMap<String,Object> objects = new HashMap<>();
@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
                     message.arg1 = MSG_LOAD;
                     API_Factory factory = API_Factory.getInstance(v.getContext());
                     API_Movie movie = factory.getAPI_Movie();
-                    series = movie.Search_Movie("One","en-US",1);
+                    series = movie.Search_Movie("One",1);
                     message = new Message();
                     message.arg1 = MSG_START;
                     HashMap<String,Object> objects = new HashMap<>();
