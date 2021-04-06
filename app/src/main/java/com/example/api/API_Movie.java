@@ -53,11 +53,12 @@ public class API_Movie {
         }
         return movies;
     }
-    public ArrayList<Movie> findTrendingMovies(String time_window) throws IOException {
+    public ArrayList<Movie> findTrendingMovies(String time_window,int page) throws IOException {
         ArrayList<Movie> movies = new ArrayList<>();
         OkHttpClient client = new OkHttpClient();
-        HttpUrl.Builder builder = HttpUrl.parse(Trending_Movies).newBuilder();
+        HttpUrl.Builder builder = HttpUrl.parse(Trending_Movies+time_window).newBuilder();
         builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        builder.addQueryParameter("page",page+"");
         String url = builder.build().toString();
 
         Request request = new Request.Builder().url(url).build();
@@ -75,6 +76,27 @@ public class API_Movie {
             movies.add(m);
         }
         return movies;
+
+    }
+    public JsonObject findTrendingMoviesJson(String time_window,int page) throws IOException {
+        ArrayList<Movie> movies = new ArrayList<>();
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(Trending_Movies+time_window).newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        builder.addQueryParameter("page",page+"");
+        String url = builder.build().toString();
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+
+
+        return entity;
 
     }
     public Movie findMovie(int movie_id, String lang, @Nullable String append_to_response) throws IOException {

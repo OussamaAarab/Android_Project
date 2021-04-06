@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class Movie {
+    private JsonObject obj;
     private boolean adult;
     private String backdrop_path;
     private int budget;
@@ -31,6 +32,7 @@ public class Movie {
     private int vote_count;
 
     public Movie(JsonObject o){
+        this.obj = o;
         int size = 0;
         int i=0;
         this.adult = o.get("adult").getAsBoolean();
@@ -341,6 +343,10 @@ public class Movie {
 
     public void setVote_count(int vote_count) {
         this.vote_count = vote_count;
+    }
+
+    public JsonObject getObj() {
+        return obj;
     }
 
 }
