@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedViewHolder> {
 
     ArrayList<Movie> movies;
+    private int page = 1;
+    private String RequestedMovie;
 
     public AdapterMovies(ArrayList<Movie> movies) {
         this.movies = movies;
@@ -50,6 +52,10 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
         Picasso.get().load(linkImage).into(holder.image);
         holder.title.setText(movie.getTitle());
         holder.desc.setText(movie.getOverview());
+        if(position >= movies.size() -3){
+            page++;
+
+        }
 
     }
 
@@ -72,4 +78,11 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
         }
     }
 
+    private static void LoadNextPage(){
+
+    }
+
+    public void setRequestedMovie(String requestedMovie) {
+        RequestedMovie = requestedMovie;
+    }
 }
