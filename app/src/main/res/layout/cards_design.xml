@@ -47,6 +47,7 @@
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:progressTint="@color/gold"/>
             <TextView
+                android:id="@+id/card_vote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="8dp"

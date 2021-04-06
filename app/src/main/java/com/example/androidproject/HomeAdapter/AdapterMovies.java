@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,7 +51,9 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
         Picasso.get().load(linkImage).into(holder.image);
         holder.title.setText(movie.getTitle());
         holder.desc.setText(movie.getOverview());
-
+        holder.vote.setText(movie.getVote_count()+"");
+        holder.rate.setRating(movie.getVote_average()*0.5f);
+        holder.date.setText(movie.getRelease_date());
     }
 
     @Override
@@ -61,7 +64,8 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
     public static class FeaturedViewHolder extends RecyclerView.ViewHolder{
 
         ImageView image;
-        TextView title,desc;
+        TextView title,desc,vote,date;
+        RatingBar rate;
 
         public FeaturedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +73,9 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
             image = itemView.findViewById(R.id.card_image);
             title = itemView.findViewById(R.id.card_title);
             desc = itemView.findViewById(R.id.card_desc);
+            vote = itemView.findViewById(R.id.card_vote);
+            rate = itemView.findViewById(R.id.card_rate);
+            date = itemView.findViewById(R.id.card_date);
         }
     }
 
