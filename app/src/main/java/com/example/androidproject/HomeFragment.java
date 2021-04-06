@@ -53,13 +53,6 @@ public class HomeFragment extends Fragment {
         handlerMovie = new MovieHandler();
         handlerSeries = new MovieHandler();
 
-<<<<<<< HEAD
-    /*@Override
-    public void onStart() {
-        super.onStart();
-        Log.d("Aabane","On resume");
-=======
->>>>>>> 33df58a851e364965fa12d84f2f3ecca372a682e
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -81,25 +74,11 @@ public class HomeFragment extends Fragment {
                 }
             }
         }).start();
-<<<<<<< HEAD
-    }*/
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("Asmaa","On resume");
-=======
-
->>>>>>> 33df58a851e364965fa12d84f2f3ecca372a682e
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-<<<<<<< HEAD
-                    API_Movie api_movie = API_Factory.getInstance(v.getContext()).getAPI_Movie();
-                    Movie m = api_movie.findLatestMovies();
-                    Log.d(getClass().getName(),m.getOverview());
-=======
                     Message message = new Message();
                     message.arg1 = MSG_LOAD;
                     API_Factory factory = API_Factory.getInstance(v.getContext());
@@ -112,14 +91,11 @@ public class HomeFragment extends Fragment {
                     objects.put("AdapterMovies",adapterPopularSeries);
                     message.obj = objects;
                     handlerSeries.sendMessage(message);
->>>>>>> 33df58a851e364965fa12d84f2f3ecca372a682e
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
-<<<<<<< HEAD
-=======
 
 
 
@@ -134,8 +110,5 @@ public class HomeFragment extends Fragment {
         adapters = new AdapterMovies(movies);
         recycler.setAdapter(adapters);
         return  adapters;
->>>>>>> 33df58a851e364965fa12d84f2f3ecca372a682e
     }
-
-
 }

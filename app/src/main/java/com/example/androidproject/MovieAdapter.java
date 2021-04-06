@@ -1,4 +1,4 @@
-/*package com.example.androidproject;
+package com.example.androidproject;
 
 import android.content.Context;
 import android.net.Uri;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.beans.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.net.URL;
@@ -75,4 +76,4 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
         return movies.size();
     }
 
-}*/
+}

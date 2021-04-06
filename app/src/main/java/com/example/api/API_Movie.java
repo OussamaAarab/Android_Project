@@ -21,6 +21,7 @@ public class API_Movie {
     private static final String Trending_Movies = "https://api.themoviedb.org/3/trending/movie/";
     private static final String  Movie_Details = "https://api.themoviedb.org/3/movie/";
     private static final String  Latest_Movies = "https://api.themoviedb.org/3/movie/latest";
+    private static final String Similar_Movies = "https://api.themoviedb.org/3/movie/similar";
 
     public API_Movie(API_Factory factory){ this.factory = factory;}
 
@@ -123,5 +124,28 @@ public class API_Movie {
         }
         return movies;
 
+    }
+    public Movie findSimilarMovie(int movie_id, String lang, @Nullable String append_to_response) throws IOException {
+        Movie movie = null;
+
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(Similar_Movies+movie_id).newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        builder.addQueryParameter("language",lang);
+        if(append_to_response!=null){
+            builder.addQueryParameter("append_to_response",append_to_response);
+        }
+        String url = builder.build().toString();
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+        movie = new Movie(entity);
+        return movie;
     }
 }
