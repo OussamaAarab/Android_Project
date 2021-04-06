@@ -10,7 +10,7 @@ public class Person {
     private String homepage;
     private boolean adult;
 
-    public Person(int id, String name, String gender, String biography, String profile_path, String imdb_d, String homepage, boolean adult) {
+    /*public Person(int id, String name, String gender, String biography, String profile_path, String imdb_d, String homepage, boolean adult) {
         this.id = id;
         this.name = name;
         this.gender = gender;
@@ -19,7 +19,7 @@ public class Person {
         this.imdb_d = imdb_d;
         this.homepage = homepage;
         this.adult = adult;
-    }
+    }*/
 
     public int getId() {
         return id;
