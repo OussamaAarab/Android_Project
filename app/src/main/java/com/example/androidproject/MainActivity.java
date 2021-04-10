@@ -1,6 +1,10 @@
 package com.example.androidproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+
+import android.content.Intent;
+
 import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.ExistingPeriodicWorkPolicy;
@@ -10,29 +14,30 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
-import androidx.work.Worker;
 
-import android.content.Intent;
-import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
 import android.widget.ImageView;
 import android.widget.TextView;
+
+
+import java.util.List;
 
 import com.example.workers.TrendingWorker;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     TextView slogan,text_bottom;
     Animation logo_anim,slogan_anim;
     private static int SPLASH_SCREEN = 10500;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

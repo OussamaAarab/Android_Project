@@ -1,5 +1,9 @@
 package com.example.beans;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 public class Review {
     private int id;
     private String author;
@@ -10,17 +14,70 @@ public class Review {
     private String media_title;
     private String media_type;
     private String url;
+    private JsonObject obj;
 
-    public Review(int id, String author, Person[] author_details, String content, String created_at, String media_id, String media_title, String media_type, String url) {
-        this.id = id;
-        this.author = author;
-        this.author_details = author_details;
-        this.content = content;
-        this.created_at = created_at;
-        this.media_id = media_id;
-        this.media_title = media_title;
-        this.media_type = media_type;
-        this.url = url;
+    public Review(JsonObject o) {
+        this.obj = o;
+        int size = 0;
+        int i = 0;
+
+        try {
+            this.author = o.get("author").getAsString();
+        } catch (NullPointerException | UnsupportedOperationException e) {
+            author = "";
+        }
+
+        try {
+            this.content = o.get("content").getAsString();
+        } catch (NullPointerException | UnsupportedOperationException e) {
+        }
+        try {
+            this.created_at = o.get("created_at").getAsString();
+        } catch (NullPointerException | UnsupportedOperationException e) {
+        }
+        try {
+            this.media_id = o.get("media_id").getAsString();
+        } catch (NullPointerException | UnsupportedOperationException e) {
+        }
+        try {
+            this.media_title = o.get("media_title").getAsString();
+        } catch (NullPointerException | UnsupportedOperationException e) {
+        }
+        try {
+            this.media_type = o.get("media_type").getAsString();
+        } catch (NullPointerException | UnsupportedOperationException e) {
+        }
+        try {
+            this.url = o.get("url").getAsString();
+        } catch (NullPointerException | UnsupportedOperationException e) {
+        }
+        try {
+
+            JsonArray ad = o.get("author_details").getAsJsonArray();
+            size = ad.size();
+            this.author_details = new Person[size];
+            i=0;
+            for(JsonElement author_details_elm : ad){
+                JsonObject obj = author_details_elm.getAsJsonObject();
+                Person p = new Person();
+                p.setId(obj.getAsInt());
+                p.setAdult(obj.getAsBoolean());
+                p.setHomepage(obj.getAsString());
+                p.setProfile_path(obj.getAsString());
+                p.setBiography(obj.getAsString());
+                p.setGender(obj.getAsString());
+                p.setImdb_d(obj.getAsString());
+                p.setName(obj.getAsString());
+                this.author_details[i] = p;
+                i++;
+            }
+        }catch (NullPointerException|UnsupportedOperationException ignore){
+        }
+
+        try {
+            this.id = o.get("id").getAsInt();
+        } catch (NullPointerException | UnsupportedOperationException e) {
+        }
     }
 
     public int getId() {
@@ -94,4 +151,14 @@ public class Review {
     public void setUrl(String url) {
         this.url = url;
     }
+
+
+    public JsonObject getObj() {
+        return obj;
+    }
+
+    public void setObj(JsonObject obj) {
+        this.obj = obj;
+    }
+
 }

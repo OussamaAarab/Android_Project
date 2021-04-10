@@ -11,31 +11,6 @@ public class Network {
     private String name;
     private String origin_country;
 
-    public Network(JsonObject o){
-        try {
-            this.homepage = o.get("homepage").getAsString();
-        }catch (NullPointerException|UnsupportedOperationException e){
-            homepage="";
-        }
-        try {
-            this.id = o.get("id").getAsInt();
-        }catch (NullPointerException|UnsupportedOperationException ignore){ }
-        try {
-            this.logo_path = o.get("logo_path").getAsString();
-        }catch (NullPointerException ignore){ }
-        try {
-            this.name = o.get("name").getAsString();
-        }catch (NullPointerException|UnsupportedOperationException ignore){ }
-
-        try {
-            this.origin_country = o.get("origin_country").getAsString();
-        }catch (NullPointerException|UnsupportedOperationException ignore){ }
-
-        try {
-            this.headquarters = o.get("headquarter").getAsString();
-        }catch (NullPointerException|UnsupportedOperationException ignore){ }
-
-    }
 
     public String getHeadquarters() {
         return headquarters;

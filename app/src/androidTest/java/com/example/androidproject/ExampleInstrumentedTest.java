@@ -39,7 +39,7 @@ public class ExampleInstrumentedTest {
             assertNotNull(m.getOverview());
             assertNotNull(m.getPoster_path());
         }
-        Movie mv = movie.findMovie(399566,"fr",null);
+        Movie mv = movie.findMovie(399566,null);
         assertNotNull(mv);
         assertNotNull(mv.getImdb_id());
         assertNotNull(mv.getId());

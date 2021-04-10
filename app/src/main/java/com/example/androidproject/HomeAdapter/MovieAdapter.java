@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidproject.R;
+
 import com.example.beans.Movie;
 
 import java.util.ArrayList;
@@ -58,7 +59,6 @@ public class MovieAdapter  extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
     public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, int position) {
         /*
         String s=movies.get(position).getYear()+" "+movies.get(position).getType();
-
         holder.itemView.setTag(movies.get(position));
         Glide.with(context)
                 .load(movies.get(position).getUrlImage())
