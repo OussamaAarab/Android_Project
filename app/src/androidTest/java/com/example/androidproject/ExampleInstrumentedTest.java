@@ -9,6 +9,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;
 import com.example.beans.Movie;
+import com.example.dao.DaoFactory;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,7 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        /*
         assertEquals("com.example.androidproject", appContext.getPackageName());
         //APIMOVIE testing
         API_Movie movie = API_Factory.getInstance(appContext).getAPI_Movie();
@@ -45,7 +47,13 @@ public class ExampleInstrumentedTest {
         assertNotNull(mv.getId());
         assertNotNull(mv.getGenres());
         assertNotNull(mv.getBudget());
-        assertNotNull(mv.getBackdrop_path());
+        assertNotNull(mv.getBackdrop_path());*/
+
+
+        DaoFactory factory = new DaoFactory(appContext);
+        assertNotNull(factory);
+        assertNotNull(factory.getHandler());
+        assertNotNull(factory.open());
 
     }
 
