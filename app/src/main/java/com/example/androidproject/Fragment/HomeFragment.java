@@ -1,4 +1,4 @@
-package com.example.androidproject;
+package com.example.androidproject.Fragment;
 
 import android.os.Bundle;
 import android.os.Message;
@@ -18,10 +18,10 @@ import com.example.androidproject.Handlers.MovieHandler;
 import com.example.androidproject.HomeAdapter.AdapterMovies;
 import com.example.androidproject.HomeAdapter.Slide;
 import com.example.androidproject.HomeAdapter.SlideAdapter;
+import com.example.androidproject.R;
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;
 import com.example.beans.Movie;
-import com.example.beans.Serie;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -33,20 +33,21 @@ import java.util.TimerTask;
 public class HomeFragment extends Fragment {
     View v ;
 
+    RecyclerView recyclerTrendingMovies;
     RecyclerView recyclerPopularMovies;
-    RecyclerView recyclerPopularSeries;
 
+    AdapterMovies adapterTrendingMovies;
     AdapterMovies adapterPopularMovies;
-    AdapterMovies adapterPopularSeries;
 
-    MovieHandler handlerMovie;
-    MovieHandler handlerSeries;
+    MovieHandler handlerTrendingMovies;
+    MovieHandler handlerPopularMovies;
 
     public static final int MSG_LOAD = -1;
     public static final int MSG_START = 1;
 
-    ArrayList<Movie> movies = new ArrayList<>();
-    ArrayList<Movie> series = new ArrayList<>();
+    ArrayList<Movie> trending_Movies_w = new ArrayList<>();
+    
+    ArrayList<Movie> popular_Movies = new ArrayList<>();
 
     private List<Slide> liste_Slide = new ArrayList<>();
     private ViewPager sliderpager;
@@ -57,14 +58,14 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_home, container, false);
 
-        recyclerPopularMovies = v.findViewById(R.id.recycler_popular_movies_week);
-        recyclerPopularSeries = v.findViewById(R.id.recycler_popular_series);
+        recyclerTrendingMovies = v.findViewById(R.id.recycler_popular_movies_week);
+        recyclerPopularMovies = v.findViewById(R.id.recycler_popular_series);
 
-        adapterPopularMovies = recyclerCards(recyclerPopularMovies,adapterPopularMovies,movies);
-        adapterPopularSeries = recyclerCards(recyclerPopularSeries,adapterPopularSeries,series);
+        adapterTrendingMovies = recyclerCards(recyclerTrendingMovies,adapterTrendingMovies,trending_Movies_w);
+        adapterPopularMovies = recyclerCards(recyclerPopularMovies,adapterPopularMovies,popular_Movies);
 
-        handlerMovie = new MovieHandler();
-        handlerSeries = new MovieHandler();
+        handlerTrendingMovies = new MovieHandler();
+        handlerPopularMovies = new MovieHandler();
 
         sliderpager = v.findViewById(R.id.auto_slide);
         indicator = v.findViewById(R.id.indicator);
@@ -87,14 +88,14 @@ public class HomeFragment extends Fragment {
                     message.arg1 = MSG_LOAD;
                     API_Factory factory = API_Factory.getInstance(v.getContext());
                     API_Movie movie = factory.getAPI_Movie();
-                    movies = movie.findTrendingMovies("day",1);
+                    trending_Movies_w = movie.findTrendingMovies("day",1);
                     message = new Message();
                     message.arg1 = MSG_START;
                     HashMap<String,Object> objects = new HashMap<>();
-                    objects.put("PopularMovies",movies);
-                    objects.put("AdapterMovies",adapterPopularMovies);
+                    objects.put("MoviesList",trending_Movies_w);
+                    objects.put("AdapterMovies",adapterTrendingMovies);
                     message.obj = objects;
-                    handlerMovie.sendMessage(message);
+                    handlerTrendingMovies.sendMessage(message);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -109,14 +110,14 @@ public class HomeFragment extends Fragment {
                     message.arg1 = MSG_LOAD;
                     API_Factory factory = API_Factory.getInstance(v.getContext());
                     API_Movie movie = factory.getAPI_Movie();
-                    series = movie.Search_Movie("One",1);
+                    popular_Movies = movie.findPopularMovies();
                     message = new Message();
                     message.arg1 = MSG_START;
                     HashMap<String,Object> objects = new HashMap<>();
-                    objects.put("PopularMovies",series);
-                    objects.put("AdapterMovies",adapterPopularSeries);
+                    objects.put("MoviesList",popular_Movies);
+                    objects.put("AdapterMovies",adapterPopularMovies);
                     message.obj = objects;
-                    handlerSeries.sendMessage(message);
+                    handlerPopularMovies.sendMessage(message);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

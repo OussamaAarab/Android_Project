@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home"
+    tools:context=".Fragment.Home"
     android:orientation="vertical"
     android:background="@drawable/gradient_background">
 
@@ -167,7 +167,7 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="21sp"
-                        android:text="@string/popular_series"
+                        android:text="@string/popular_movies"
                         android:textColor="@color/black"
 
                         />

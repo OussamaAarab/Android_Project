@@ -1,4 +1,4 @@
-package com.example.androidproject;
+package com.example.androidproject.Fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import com.example.androidproject.R;
 import com.example.workers.TrendingWorker;
 import com.google.common.util.concurrent.ListenableFuture;
 
