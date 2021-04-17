@@ -54,6 +54,7 @@
 
 
     <ScrollView
+        android:id="@+id/scrollView_Home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="30dp"
@@ -81,16 +82,18 @@
                 android:layout_height="wrap_content"
                 app:tabIndicatorHeight="0dp">
             </com.google.android.material.tabs.TabLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0dp"
                 android:orientation="vertical"
-                android:background="@drawable/gradient_background_cards">
+                android:layout_marginTop="5dp"
+                >
 
 
                 <RelativeLayout
-                    android:id="@+id/layout_title_movie"
+                    android:id="@+id/layout_title_trending_movie_week"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
@@ -101,12 +104,12 @@
                     >
 
                     <TextView
-                        android:id="@+id/title_popular_movies"
+                        android:id="@+id/title_trending_movies_week"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:textSize="23sp"
-                        android:text="@string/popular_movies"
+                        android:textSize="21sp"
+                        android:text="@string/trending_movies_week"
                         android:textColor="@color/black"
 
                         />
@@ -123,7 +126,7 @@
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_popular_movies"
+                    android:id="@+id/recycler_popular_movies_week"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:paddingBottom="5dp" />
@@ -131,13 +134,20 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/greyLight"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp"
                 android:orientation="vertical"
-                android:background="@drawable/gradient_background_cards">
+                >
 
 
                 <RelativeLayout
@@ -156,7 +166,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:textSize="23sp"
+                        android:textSize="21sp"
                         android:text="@string/popular_series"
                         android:textColor="@color/black"
 

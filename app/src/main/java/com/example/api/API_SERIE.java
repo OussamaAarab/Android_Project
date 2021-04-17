@@ -1,7 +1,10 @@
 package com.example.api;
 
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
+import com.example.beans.Movie;
 import com.example.beans.Review;
 import com.example.beans.Serie;
 import com.google.gson.Gson;
@@ -21,6 +24,7 @@ public class API_SERIE {
 
     private API_Factory factory;
     private static final String Search = "https://api.themoviedb.org/3/search/tv";
+    private static final String Trending_Series = "https://api.themoviedb.org/3/trending/tv/";
     private static final String  Serie_Details = "https://api.themoviedb.org/3/tv/";
     private static final String  Latest_Series = "https://api.themoviedb.org/3/tv/latest";
 
@@ -53,6 +57,35 @@ public class API_SERIE {
         }
         return series;
     }
+
+    public ArrayList<Serie> findTrendingSeries(String time_window, int page) throws IOException {
+        ArrayList<Serie> series = new ArrayList<>();
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(Trending_Series+time_window).newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        builder.addQueryParameter("page",page+"");
+        builder.addQueryParameter("language",API_Factory.getLang());
+        String url = builder.build().toString();
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        Log.d(API_Movie.class.getName(),"API LIMIT REMAINING : " + response.headers().get("X-RateLimit-Remaining") );
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+
+        JsonArray array = entity.getAsJsonArray("results");
+        for(JsonElement o : array ){
+            Serie m = new Serie(o.getAsJsonObject());
+            series.add(m);
+        }
+        return series;
+
+    }
+
     public Serie findSerie(int id, @Nullable String append_to_response) throws IOException {
         Serie serie = null;
 
