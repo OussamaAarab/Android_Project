@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.example.androidproject.HomeAdapter.AdapterMovies;
 import com.example.androidproject.Fragment.HomeFragment;
+import com.example.androidproject.HomeAdapter.SlideAdapter;
 import com.example.beans.Movie;
 
 import java.util.ArrayList;
@@ -23,6 +24,12 @@ public class MovieHandler extends Handler {
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
             AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterMovies");
             adapter.SetData(movies);
+        }
+        if (msg.arg1 == HomeFragment.MSG_SLIDE) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("SlideMovie");
+            SlideAdapter adapter = (SlideAdapter) objMovie.get("SlideAdapter");
+            adapter.setData(movies);
         }
         if (msg.arg1 == HomeFragment.MSG_LOAD) {
             // TODO : Traitement du chargement

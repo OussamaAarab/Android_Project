@@ -82,7 +82,7 @@ public class API_Movie {
         builder.addQueryParameter("page",page+"");
         builder.addQueryParameter("language",API_Factory.getLang());
         String url = builder.build().toString();
-
+        Log.d(this.getClass().getName(),url);
         Request request = new Request.Builder().url(url).build();
 
         Response response = client.newCall(request).execute();

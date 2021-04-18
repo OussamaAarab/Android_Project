@@ -50,10 +50,12 @@ public class ExampleInstrumentedTest {
         assertNotNull(mv.getBackdrop_path());*/
 
 
-        DaoFactory factory = new DaoFactory(appContext);
-        assertNotNull(factory);
-        assertNotNull(factory.getHandler());
-        assertNotNull(factory.open());
+        API_Movie movie = API_Factory.getInstance(appContext).getAPI_Movie();
+        ArrayList<Movie> movies = movie.findTrendingMovies("week",1);
+        for(int i=0;i<movies.size();i++)
+        {
+            Log.d(this.getClass().getName(), movies.get(i).getTitle());
+        }
 
     }
 
