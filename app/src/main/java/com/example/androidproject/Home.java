@@ -9,9 +9,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+<<<<<<< Updated upstream:app/src/main/java/com/example/androidproject/Home.java
+=======
+import com.example.androidproject.R;
+import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
+>>>>>>> Stashed changes:app/src/main/java/com/example/androidproject/Fragment/Home.java
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemClicked {
 
     BottomNavigationView bottomNav;
     @Override
@@ -55,4 +60,15 @@ public class Home extends AppCompatActivity {
                     return true;
                 }
             };
+    @Override
+    public void onItemClicked(int id) {
+
+        Fragment fragment=new MovieDetails(id);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment, null)
+                .addToBackStack(null)
+                .commit();
+
+    }
 }

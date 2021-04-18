@@ -6,9 +6,14 @@ import android.os.Message;
 
 import androidx.annotation.NonNull;
 
+<<<<<<< Updated upstream
 import com.example.androidproject.HomeFragment;
 import com.example.androidproject.SearchFragment;
 import com.example.androidproject.searchAdapter.MovieSearchAdapter;
+=======
+import com.example.androidproject.Fragment.SearchFragment;
+import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
+>>>>>>> Stashed changes
 import com.example.beans.Movie;
 
 import java.util.ArrayList;

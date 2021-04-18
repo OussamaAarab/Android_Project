@@ -1,4 +1,4 @@
-package com.example.androidproject.searchAdapter;
+package com.example.androidproject.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -21,11 +21,13 @@ import com.squareup.picasso.Picasso;
 public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.ViewHolder>{
     ArrayList<Movie> movies = new ArrayList<>();
     Context context;
-    MovieClicked movieClicked;
+    ItemClicked movieClicked;
 
-    interface MovieClicked {
-        public void onMovieClicked(int index);
+    public interface ItemClicked
+    {
+        public  void onItemClicked(int id);
     }
+
 
     public MovieSearchAdapter(ArrayList<Movie> list) {
         movies=list;
@@ -35,7 +37,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
     public MovieSearchAdapter(@NonNull Context context, ArrayList<Movie> list) {
         movies=list;
         this.context=context;
-//        movieClicked=(MovieClicked)context;
+        movieClicked=(ItemClicked)context;
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imMovie;
@@ -47,15 +49,17 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
             title=itemView.findViewById(R.id.movie_search_title);
             description=itemView.findViewById(R.id.movie_search_desc);
             date=itemView.findViewById(R.id.movie_search_date);
-/*
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    movieClicked.onMovieClicked(movies.indexOf((Movie) v.getTag()));
+
+                    int index=movies.indexOf((Movie) v.getTag());
+                    movieClicked.onItemClicked( movies.get(index).getId());
                 }
             });
 
- */
+
         }
 
 
@@ -66,7 +70,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
     public MovieSearchAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_movie_search,parent,false);
 
-    return new ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override

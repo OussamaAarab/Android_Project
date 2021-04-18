@@ -17,7 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import  androidx.appcompat.widget.SearchView;
 
 import com.example.androidproject.Handlers.MovieSearchHandler;
+<<<<<<< Updated upstream:app/src/main/java/com/example/androidproject/SearchFragment.java
 import com.example.androidproject.searchAdapter.MovieSearchAdapter;
+=======
+import com.example.androidproject.R;
+import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
+>>>>>>> Stashed changes:app/src/main/java/com/example/androidproject/Fragment/SearchFragment.java
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;
 import com.example.beans.Movie;
@@ -55,11 +60,12 @@ public class SearchFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         manager=new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
-        adapter=new MovieSearchAdapter(movies);
+        adapter=new MovieSearchAdapter(this.getActivity(),movies);
         recyclerView.setAdapter(adapter);
 
         handlerMovie = new MovieSearchHandler();
 
+<<<<<<< Updated upstream:app/src/main/java/com/example/androidproject/SearchFragment.java
      searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
          @Override
          public boolean onQueryTextSubmit(String query) {
@@ -124,11 +130,77 @@ public class SearchFragment extends Fragment {
              return false;
          }
      });
+=======
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            Message message = new Message();
+                            message.arg1 = MSG_LOAD;
+
+                            try {
+                                API_Factory factory = API_Factory.getInstance(view.getContext());
+                                API_Movie api_movie = factory.getAPI_Movie();
+                                movies = api_movie.Search_Movie(query,1);
+                                message = new Message();
+                                message.arg1 = MSG_START;
+                                HashMap<String,Object> objects = new HashMap<>();
+                                objects.put("MovieSearch",movies);
+                                objects.put("MovieSearchAdapter",adapter);
+                                objects.put("requestedMovie",query);
+                                message.obj = objects;
+                                handlerMovie.sendMessage(message);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Message message = new Message();
+                            message.arg1 = MSG_LOAD;
+                            try {
+                                API_Factory factory = API_Factory.getInstance(view.getContext());
+                                API_Movie api_movie = factory.getAPI_Movie();
+                                movies = api_movie.Search_Movie(newText,1);
+                                message = new Message();
+                                message.arg1 = MSG_START;
+                                HashMap<String,Object> objects = new HashMap<>();
+                                objects.put("MovieSearch",movies);
+                                objects.put("MovieSearchAdapter",adapter);
+                                objects.put("requestedMovie",newText);
+                                message.obj = objects;
+                                handlerMovie.sendMessage(message);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+
+                return false;
+            }
+        });
+>>>>>>> Stashed changes:app/src/main/java/com/example/androidproject/Fragment/SearchFragment.java
 
         return  view;
-
     }
-
 
 
 
