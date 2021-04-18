@@ -101,7 +101,6 @@ public class API_Movie {
 
     }
     public JsonObject findTrendingMoviesJson(String time_window,int page) throws IOException {
-        ArrayList<Movie> movies = new ArrayList<>();
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder builder = HttpUrl.parse(Trending_Movies+time_window).newBuilder();
         builder.addQueryParameter("api_key",factory.getAPI_KEY());

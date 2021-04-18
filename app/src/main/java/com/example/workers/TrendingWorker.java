@@ -45,7 +45,7 @@ public class TrendingWorker extends Worker {
     @Override
     public Result doWork() {
         try {
-            String movies = LoadTrending("day");
+            String movies = LoadTrending("day","movie");
             try (FileOutputStream fileOutputStream = getApplicationContext().openFileOutput(TRENDING_MOVIES_DAY,Context.MODE_PRIVATE)) {
                 fileOutputStream.write(movies.getBytes());
             }catch (IOException e ){
@@ -64,7 +64,8 @@ public class TrendingWorker extends Worker {
     }
 
 
-    public String LoadTrending(String time_window) throws Exception {
+    public String LoadTrending(String time_window,String type) throws Exception {
+
         API_Movie api_movie = API_Factory.getInstance(getApplicationContext()).getAPI_Movie();
         StringBuilder movies = new StringBuilder("[");
         for( int i=1;i<=LoadedPages;i++ ){

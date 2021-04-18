@@ -31,6 +31,8 @@ public class Movie {
     private float vote_average;
     private int vote_count;
 
+
+
     public Movie(JsonObject o){
         this.obj = o;
         int size = 0;
