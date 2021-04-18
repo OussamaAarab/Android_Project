@@ -6,14 +6,12 @@ import android.os.Message;
 
 import androidx.annotation.NonNull;
 
-<<<<<<< Updated upstream
-import com.example.androidproject.HomeFragment;
-import com.example.androidproject.SearchFragment;
-import com.example.androidproject.searchAdapter.MovieSearchAdapter;
-=======
+
 import com.example.androidproject.Fragment.SearchFragment;
+
+
 import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
->>>>>>> Stashed changes
+
 import com.example.beans.Movie;
 
 import java.util.ArrayList;
@@ -28,7 +26,10 @@ public class MovieSearchHandler extends Handler {
             HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
             MovieSearchAdapter adapter = (MovieSearchAdapter) objMovie.get("MovieSearchAdapter");
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MovieSearch");
+            String requestedMovie = (String) objMovie.get("requestedMovie");
             adapter.SetData(movies);
+            adapter.setRequestedMovie(requestedMovie);
+
         }
 
 

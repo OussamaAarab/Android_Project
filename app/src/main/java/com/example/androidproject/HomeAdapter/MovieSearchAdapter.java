@@ -1,6 +1,8 @@
 package com.example.androidproject.HomeAdapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +17,16 @@ import com.example.androidproject.R;
 import java.util.ArrayList;
 
 import com.example.api.API_Factory;
+import com.example.api.API_Movie;
 import com.example.beans.*;
 import com.squareup.picasso.Picasso;
 
 public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.ViewHolder>{
     ArrayList<Movie> movies = new ArrayList<>();
+    private boolean loading = false;
+    private int page = 1;
+    private String RequestedMovie;
+    private String lang = "fr";//Todo change language to users's preferences
     Context context;
     ItemClicked movieClicked;
 
@@ -93,6 +100,11 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
         }
         Picasso.get().load(linkImage).into(holder.imMovie);
         holder.title.setText(movie.getTitle());
+        if(position >= movies.size() -3){
+
+            LoadNextPage();
+
+        }
 
     }
 
@@ -105,6 +117,44 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
     public void SetData(ArrayList<Movie> movies) {
         this.movies = movies;
         this.notifyDataSetChanged();
+
+    }
+    private  void LoadNextPage(){
+        if(!loading){
+            page++;
+            new AsyncTask<Void, Void, Void>() {
+
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    try {
+                        MovieSearchAdapter.this.loading = true;
+                        API_Movie api_movie = API_Factory.getInstance(MovieSearchAdapter.this.context).getAPI_Movie();
+                        ArrayList<Movie> mvs = api_movie.Search_Movie(RequestedMovie,MovieSearchAdapter.this.page);
+                        MovieSearchAdapter.this.movies.addAll(mvs);
+                        Log.d(MovieSearchAdapter.class.getName(),"Loaded Page " + MovieSearchAdapter.this.page);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void aVoid) {
+                    super.onPostExecute(aVoid);
+                    MovieSearchAdapter.this.notifyDataSetChanged();
+                    MovieSearchAdapter.this.loading = false;
+                }
+            }.execute();
+
+        }
+
+
+
+    }
+
+    public void setRequestedMovie(String requestedMovie) {
+        RequestedMovie = requestedMovie;
+
 
     }
 

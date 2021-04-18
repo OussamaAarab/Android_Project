@@ -1,4 +1,4 @@
-package com.example.androidproject;
+package com.example.androidproject.Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,11 +9,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
-<<<<<<< Updated upstream:app/src/main/java/com/example/androidproject/Home.java
-=======
+
 import com.example.androidproject.R;
 import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
->>>>>>> Stashed changes:app/src/main/java/com/example/androidproject/Fragment/Home.java
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemClicked {
@@ -63,7 +62,7 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
     @Override
     public void onItemClicked(int id) {
 
-        Fragment fragment=new MovieDetails(id);
+        Fragment fragment=new com.example.androidproject.Fragment.MovieDetails(id);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment, null)

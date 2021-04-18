@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class Movie {
+    private JsonObject obj;
     private boolean adult;
     private String backdrop_path;
     private int budget;
@@ -31,6 +32,7 @@ public class Movie {
     private int vote_count;
 
     public Movie(JsonObject o){
+        this.obj = o;
         int size = 0;
         int i=0;
         this.adult = o.get("adult").getAsBoolean();
@@ -47,7 +49,7 @@ public class Movie {
         }
         try {
 
-            JsonArray grs = o.get("grenres").getAsJsonArray();
+            JsonArray grs = o.get("genres").getAsJsonArray();
             size = grs.size();
             this.genres = new Genre[size];
             i=0;
@@ -125,9 +127,9 @@ public class Movie {
             spoken_languages = new Language[size];
             for(JsonElement spkelm : spk_lng){
                 Language lng = new Language();
-                lng.setEnglish_name(spk_lng.getAsJsonObject().get("english_name").getAsString());
-                lng.setName(spk_lng.getAsJsonObject().get("name").getAsString());
-                lng.setIso_639_1(spk_lng.getAsJsonObject().get("iso_639_1").getAsString());
+                lng.setEnglish_name(spkelm.getAsJsonObject().get("english_name").getAsString());
+                lng.setName(spkelm.getAsJsonObject().get("name").getAsString());
+                lng.setIso_639_1(spkelm.getAsJsonObject().get("iso_639_1").getAsString());
                 spoken_languages[i] = lng;
                 i++;
             }
@@ -150,6 +152,10 @@ public class Movie {
         try {
             this.vote_count = o.get("vote_count").getAsInt();
         }catch (NullPointerException|UnsupportedOperationException ignore){ }
+
+    }
+
+    public Movie() {
 
     }
 
@@ -337,6 +343,10 @@ public class Movie {
 
     public void setVote_count(int vote_count) {
         this.vote_count = vote_count;
+    }
+
+    public JsonObject getObj() {
+        return obj;
     }
 
 }
