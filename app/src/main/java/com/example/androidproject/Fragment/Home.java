@@ -1,4 +1,4 @@
-package com.example.androidproject;
+package com.example.androidproject.Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.example.androidproject.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Home extends AppCompatActivity {

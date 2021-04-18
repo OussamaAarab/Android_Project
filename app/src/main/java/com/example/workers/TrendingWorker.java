@@ -10,21 +10,16 @@ import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.example.androidproject.MainActivity;
+import com.example.androidproject.Fragment.MainActivity;
 import com.example.androidproject.R;
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;
 
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 

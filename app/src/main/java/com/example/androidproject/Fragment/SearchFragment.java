@@ -1,4 +1,4 @@
-package com.example.androidproject;
+package com.example.androidproject.Fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import  androidx.appcompat.widget.SearchView;
 
 import com.example.androidproject.Handlers.MovieSearchHandler;
+import com.example.androidproject.R;
 import com.example.androidproject.searchAdapter.MovieSearchAdapter;
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;

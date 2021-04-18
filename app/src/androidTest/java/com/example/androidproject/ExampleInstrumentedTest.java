@@ -81,9 +81,7 @@ public class ExampleInstrumentedTest {
 
        // Log.d(ExampleInstrumentedTest.class.getName(),new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
 
-        API_SERIE api_serie = API_Factory.getInstance(appContext).getAPI_Serie();
-        JsonObject obj = api_serie.findTrendingSeriesJson("day",1);
-        Log.d(this.getClass().getName(),obj.toString());
+
 
     }
 
