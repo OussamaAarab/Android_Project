@@ -5,11 +5,13 @@ import android.os.Handler;
 import android.os.Message;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StyleableRes;
 
-import com.example.androidproject.HomeFragment;
-import com.example.androidproject.SearchFragment;
-import com.example.androidproject.searchAdapter.MovieSearchAdapter;
+
+import com.example.androidproject.Fragment.SearchFragment;
+
+
+import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
+
 import com.example.beans.Movie;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.androidproject;
+package com.example.androidproject.Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +9,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+
+import com.example.androidproject.R;
+import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemClicked {
 
     BottomNavigationView bottomNav;
     @Override
@@ -36,7 +40,11 @@ public class Home extends AppCompatActivity {
                             selectedFragment = new HomeFragment();
                             break;
                         case R.id.nav_search:
-                            selectedFragment = new SearchFragment();
+                            try {
+                                selectedFragment = new SearchFragment();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             Log.i("Search","Clique sur le boutton search");
                             break;
                         case R.id.nav_video:
@@ -51,4 +59,15 @@ public class Home extends AppCompatActivity {
                     return true;
                 }
             };
+    @Override
+    public void onItemClicked(int id) {
+
+        Fragment fragment=new com.example.androidproject.Fragment.MovieDetails(id);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment, null)
+                .addToBackStack(null)
+                .commit();
+
+    }
 }

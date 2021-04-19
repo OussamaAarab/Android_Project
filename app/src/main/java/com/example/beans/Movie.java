@@ -31,6 +31,8 @@ public class Movie {
     private float vote_average;
     private int vote_count;
 
+
+
     public Movie(JsonObject o){
         this.obj = o;
         int size = 0;
@@ -56,8 +58,8 @@ public class Movie {
             for(JsonElement genre_elm : grs){
                 JsonObject obj = genre_elm.getAsJsonObject();
                 Genre g = new Genre();
-                g.setId(obj.getAsInt());
-                //Todo : Get the genre name
+                g.setId(obj.get("id").getAsInt());
+                g.setName(obj.get("name").getAsString());
                 this.genres[i] = g;
                 i++;
             }

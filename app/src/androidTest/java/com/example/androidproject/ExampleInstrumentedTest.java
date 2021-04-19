@@ -8,13 +8,20 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;
+import com.example.api.API_SERIE;
 import com.example.beans.Movie;
+import com.example.beans.Serie;
 import com.example.dao.DaoFactory;
+import com.example.dao.DaoMovie;
+import com.google.gson.JsonObject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import static org.junit.Assert.*;
 
@@ -29,8 +36,9 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        /*
+
         assertEquals("com.example.androidproject", appContext.getPackageName());
+<<<<<<< HEAD
         //APIMOVIE testing
         API_Movie movie = API_Factory.getInstance(appContext).getAPI_Movie();
         ArrayList<Movie> movies = movie.findTrendingMovies("day",1);
@@ -53,6 +61,13 @@ public class ExampleInstrumentedTest {
         assertNotNull(factory);
         assertNotNull(factory.getHandler());
         assertNotNull(factory.open());
+=======
+
+        String key = API_Factory.getInstance(appContext).getAPI_Movie().getTrailerKey(399566);
+
+        Log.d(getClass().getName(),key);
+
+>>>>>>> f8502a9fdcd1a4d0e52d737e56df08adda71bc3b
 
     }
 

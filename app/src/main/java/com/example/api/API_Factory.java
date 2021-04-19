@@ -57,7 +57,8 @@ public class API_Factory {
     public API_Movie getAPI_Movie(){
         return new API_Movie(this);
     }
-    public API_SERIE getAPI_SERIE(){
+
+    public API_SERIE getAPI_Serie(){
         return new API_SERIE(this);
     }
 }

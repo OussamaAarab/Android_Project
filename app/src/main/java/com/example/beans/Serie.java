@@ -419,7 +419,7 @@ public class Serie {
                 this.origin_country[i] = j;
                 i++;
             }
-        }catch (NullPointerException|UnsupportedOperationException ignore){
+        }catch (NullPointerException|UnsupportedOperationException|IllegalStateException ignore){
         }
 
         try {

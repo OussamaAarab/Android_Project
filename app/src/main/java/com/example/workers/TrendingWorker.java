@@ -10,21 +10,16 @@ import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.example.androidproject.MainActivity;
+import com.example.androidproject.Fragment.MainActivity;
 import com.example.androidproject.R;
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;
 
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
@@ -45,7 +40,7 @@ public class TrendingWorker extends Worker {
     @Override
     public Result doWork() {
         try {
-            String movies = LoadTrending("day");
+            String movies = LoadTrending("day","movie");
             try (FileOutputStream fileOutputStream = getApplicationContext().openFileOutput(TRENDING_MOVIES_DAY,Context.MODE_PRIVATE)) {
                 fileOutputStream.write(movies.getBytes());
             }catch (IOException e ){
@@ -64,7 +59,8 @@ public class TrendingWorker extends Worker {
     }
 
 
-    public String LoadTrending(String time_window) throws Exception {
+    public String LoadTrending(String time_window,String type) throws Exception {
+
         API_Movie api_movie = API_Factory.getInstance(getApplicationContext()).getAPI_Movie();
         StringBuilder movies = new StringBuilder("[");
         for( int i=1;i<=LoadedPages;i++ ){
