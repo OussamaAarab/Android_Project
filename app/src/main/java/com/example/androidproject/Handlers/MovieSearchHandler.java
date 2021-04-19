@@ -6,8 +6,12 @@ import android.os.Message;
 
 import androidx.annotation.NonNull;
 
+
 import com.example.androidproject.Fragment.SearchFragment;
-import com.example.androidproject.searchAdapter.MovieSearchAdapter;
+
+
+import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
+
 import com.example.beans.Movie;
 
 import java.util.ArrayList;
