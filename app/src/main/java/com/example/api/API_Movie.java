@@ -28,7 +28,7 @@ public class API_Movie {
     private API_Factory factory;
     private static final String Search = "https://api.themoviedb.org/3/search/movie";
     private static final String Trending_Movies = "https://api.themoviedb.org/3/trending/movie/";
-    private static final String Popular_Movies = "https://api.themoviedb.org/3/movie/popular/";
+    private static final String Popular_Movies = "https://api.themoviedb.org/3/movie/popular";
     private static final String  Movie_Details = "https://api.themoviedb.org/3/movie/";
     private static final String  Latest_Movies = "https://api.themoviedb.org/3/movie/latest";
 
@@ -110,7 +110,7 @@ public class API_Movie {
         //builder.addQueryParameter("page",page+"");
         builder.addQueryParameter("language",API_Factory.getLang());
         String url = builder.build().toString();
-
+        Log.d(this.getClass().getName(),url);
         Request request = new Request.Builder().url(url).build();
 
         Response response = client.newCall(request).execute();
@@ -287,6 +287,35 @@ public class API_Movie {
             reviews.add(r);
         }
         return reviews;
+    }
+
+    public String getTrailerKey(int id ) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(Movie_Details+id+"/videos").newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+
+        String url = builder.build().toString();
+        Log.d(getClass().getName(),url);
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+
+        JsonArray array = entity.getAsJsonArray("results");
+        for (JsonElement res : array){
+            JsonObject res_ = res.getAsJsonObject();
+            if(res_.get("type").getAsString().equals("Trailer")){
+                return res_.get("key").getAsString();
+            }
+        }
+        return "";
+
+
     }
 
 }

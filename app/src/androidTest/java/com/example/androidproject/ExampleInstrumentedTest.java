@@ -38,49 +38,10 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         assertEquals("com.example.androidproject", appContext.getPackageName());
-        //APIMOVIE testing
-        /*
-        API_Movie movie = API_Factory.getInstance(appContext).getAPI_Movie();
 
-        ArrayList<Movie> movies = movie.findTrendingMovies("day",1);
-        assertFalse(movies.isEmpty());
+        String key = API_Factory.getInstance(appContext).getAPI_Movie().getTrailerKey(399566);
 
-        for(Movie m : movies){
-            Log.d(ExampleInstrumentedTest.class.getName(),"Testing movie "+ m.getTitle());
-            assertNotNull(m.getTitle());
-            assertNotNull(m.getOverview());
-            assertNotNull(m.getPoster_path());
-        }
-
-
-
-        Movie mv = movie.findMovie(399566,null);
-        assertNotNull(mv);
-        assertNotNull(mv.getImdb_id());
-        assertNotNull(mv.getId());
-        assertNotNull(mv.getGenres());
-        assertNotNull(mv.getBudget());
-        assertNotNull(mv.getBackdrop_path());
-
-
-
-
-        DaoMovie daoMovie = new DaoMovie(appContext);
-
-        Log.d(ExampleInstrumentedTest.class.getName(),mv.getOverview());
-
-        //daoMovie.add_to_visited(mv);
-        movies = daoMovie.findVisited();
-        assertNotNull(movies);
-        assertNotEquals(movies.size(),0);
-        assertEquals(movies.get(0).getOverview(),mv.getOverview());
-        Log.d(ExampleInstrumentedTest.class.getName(),movies.get(0).getOverview());
-
-         */
-
-
-       // Log.d(ExampleInstrumentedTest.class.getName(),new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
-
+        Log.d(getClass().getName(),key);
 
 
     }
