@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 
 import com.example.beans.Movie;
 import com.example.beans.Review;
+import com.example.beans.Trailer;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -259,5 +260,30 @@ public class API_Movie {
         }
         return reviews;
     }
+    public Trailer GetMovieTrailer(int movie_id, @Nullable String append_to_response) throws IOException {
+        Trailer trailer = null;
+
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(Movie_Details+movie_id+"videos").newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        builder.addQueryParameter("language",API_Factory.getLang());
+        if(append_to_response!=null){
+            builder.addQueryParameter("append_to_response",append_to_response);
+        }
+        String url = builder.build().toString();
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        Log.d(API_Movie.class.getName(),"API LIMIT REMAINING : " + response.headers().get("X-RateLimit-Remaining") );
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+        trailer = new Trailer(entity);
+        return trailer;
+    }
+
 
 }

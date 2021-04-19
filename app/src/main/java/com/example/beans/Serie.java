@@ -29,7 +29,7 @@ public class Serie {
     private String overview;
     private int popularity;
     private String poster_path;
-    private Season seasons;
+    private Season[] seasons;
     private String status;
     private String tagline;
     private String type;
@@ -220,11 +220,11 @@ public class Serie {
         this.poster_path = poster_path;
     }
 
-    public Season getSeasons() {
+    public Season[] getSeasons() {
         return seasons;
     }
 
-    public void setSeasons(Season seasons) {
+    public void setSeasons(Season[] seasons) {
         this.seasons = seasons;
     }
 
@@ -367,9 +367,19 @@ public class Serie {
                 p.setVote_count(obj.getAsInt());
                 this.last_episode_to_air = p;
 
-        }catch (NullPointerException|UnsupportedOperationException ignore){
+        }catch (NullPointerException|UnsupportedOperationException ignore){ }
 
-        }
+        try {
+            JsonArray ol = o.get("original_language").getAsJsonArray();
+            this.original_language = new Language();
+            JsonElement original_language_elm = ol;
+            JsonObject obj = original_language_elm.getAsJsonObject();
+            Language l = new Language();
+            l.setIso_639_1(obj.getAsString());
+            l.setEnglish_name(obj.getAsString());
+            l.setName(obj.getAsString());
+            this.original_language = l;
+        }catch (NullPointerException|UnsupportedOperationException ignore){ }
 
         try {
             this.id = o.get("id").getAsInt();
@@ -449,6 +459,30 @@ public class Serie {
                 g.setLogo_path(obj.getAsString());
                 g.setOrigin_country(obj.getAsString());
                 this.networks[i] = g;
+                i++;
+            }
+        }catch (NullPointerException|UnsupportedOperationException ignore){
+
+        }
+
+        try {
+
+            JsonArray se = o.get("seasons").getAsJsonArray();
+            size = se.size();
+            this.seasons = new Season[size];
+            int episode_cont= this.number_of_episodes;
+            i=0;
+            for(JsonElement seasons_elm : se){
+                JsonObject obj = seasons_elm.getAsJsonObject();
+                Season s = new Season();
+                s.setId(obj.getAsInt());
+                s.setAir_date(obj.getAsString());
+                s.setName(obj.getAsString());
+                s.setOverview(obj.getAsString());
+                s.setPoster_path(obj.getAsString());
+                s.setSeason_number(obj.getAsInt());
+                s.setEpisode_count(obj.getAsInt());
+                this.seasons[i] = s;
                 i++;
             }
         }catch (NullPointerException|UnsupportedOperationException ignore){

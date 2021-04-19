@@ -9,6 +9,15 @@ public class Season {
     private String _id;
     private String poster_path;
     private int season_number;
+    private int episode_count= this.episodes.length;
+
+    public int getEpisode_count() {
+        return episode_count;
+    }
+
+    public void setEpisode_count(int episode_count) {
+        this.episode_count = episode_count;
+    }
 
     public int getId() {
         return id;

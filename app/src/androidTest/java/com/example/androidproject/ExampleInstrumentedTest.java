@@ -49,7 +49,6 @@ public class ExampleInstrumentedTest {
         assertNotNull(mv.getBudget());
         assertNotNull(mv.getBackdrop_path());*/
 
-
         DaoFactory factory = new DaoFactory(appContext);
         assertNotNull(factory);
         assertNotNull(factory.getHandler());
