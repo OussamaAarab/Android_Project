@@ -1,5 +1,7 @@
 package com.example.androidproject.HomeAdapter;
 
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +24,23 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
     ArrayList<Movie> movies;
     private int page = 1;
     private String RequestedMovie;
+    Context context;
+    ItemClicked movieClicked;
+
+    public interface ItemClicked
+    {
+        public void onItemClicked(int id);
+    }
+
 
     public AdapterMovies(ArrayList<Movie> movies) {
         this.movies = movies;
+    }
+
+    public AdapterMovies(@NonNull Context context, ArrayList<Movie> movies) {
+        this.movies=movies;
+        this.context=context;
+        movieClicked=(ItemClicked)context;
     }
 
     public void SetData(ArrayList<Movie> movies) {
@@ -69,7 +85,7 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
         return movies.size();
     }
 
-    public static class FeaturedViewHolder extends RecyclerView.ViewHolder{
+    public class FeaturedViewHolder extends RecyclerView.ViewHolder{
 
         ImageView image;
         TextView title,desc,vote,date;
@@ -84,10 +100,19 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
             vote = itemView.findViewById(R.id.card_vote);
             rate = itemView.findViewById(R.id.card_rate);
             date = itemView.findViewById(R.id.card_date);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int index = movies.indexOf((Movie) v.getTag());
+                    movieClicked.onItemClicked( movies.get(index).getId());
+                }
+            });
         }
     }
 
-    private static void LoadNextPage(){
+    private void LoadNextPage(){
 
     }
 

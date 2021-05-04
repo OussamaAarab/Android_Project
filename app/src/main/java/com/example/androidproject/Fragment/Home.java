@@ -10,12 +10,13 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 
+import com.example.androidproject.HomeAdapter.AdapterMovies;
 import com.example.androidproject.R;
 import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemClicked {
+public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemClicked, AdapterMovies.ItemClicked {
 
     BottomNavigationView bottomNav;
     @Override
