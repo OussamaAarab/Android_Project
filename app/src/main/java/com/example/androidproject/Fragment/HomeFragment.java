@@ -16,7 +16,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.androidproject.Handlers.MovieHandler;
 import com.example.androidproject.HomeAdapter.AdapterMovies;
-import com.example.androidproject.HomeAdapter.Slide;
 import com.example.androidproject.HomeAdapter.SlideAdapter;
 import com.example.androidproject.R;
 import com.example.api.API_Factory;
