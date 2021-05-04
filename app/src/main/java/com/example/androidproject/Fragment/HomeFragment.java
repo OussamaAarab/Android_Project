@@ -35,22 +35,32 @@ public class HomeFragment extends Fragment {
 
     RecyclerView recyclerTrendingMovies;
     RecyclerView recyclerPopularMovies;
+    RecyclerView recyclerHorrorMovies;
+    RecyclerView recyclerActionMovies;
 
     AdapterMovies adapterTrendingMovies;
     AdapterMovies adapterPopularMovies;
+    AdapterMovies adapterHorrorMovies;
+    AdapterMovies adapterActionMovies;
     SlideAdapter slideAdapter;
 
     MovieHandler handlerTrendingMovies;
     MovieHandler handlerPopularMovies;
+    MovieHandler handlerHorrorMovies;
+    MovieHandler handlerActionMovies;
 
     public static final int MSG_LOAD = -1;
     public static final int MSG_START = 1;
     public static final int MSG_SLIDE = 2;
     public static final int MSG_POPULAR = 3;
+    public static final int MSG_HORROR = 5;
+    public static final int MSG_ACTION = 6;
 
     ArrayList<Movie> trending_Movies_w = new ArrayList<>();
     ArrayList<Movie> trending_Movies_d = new ArrayList<>();
     ArrayList<Movie> popular_Movies = new ArrayList<>();
+    ArrayList<Movie> horror_Movies = new ArrayList<>();
+    ArrayList<Movie> action_Movies = new ArrayList<>();
 
     private List<Movie> liste_Slide;
     private ViewPager sliderpager;
@@ -63,13 +73,19 @@ public class HomeFragment extends Fragment {
 
         recyclerTrendingMovies = v.findViewById(R.id.recycler_popular_movies_week);
         recyclerPopularMovies = v.findViewById(R.id.recycler_popular_series);
+        recyclerHorrorMovies = v.findViewById(R.id.recycler_horror_movie);
+        recyclerActionMovies = v.findViewById(R.id.recycler_action_movie);
         scrollView = v.findViewById(R.id.scrollView_Home);
 
         adapterTrendingMovies = recyclerCards(recyclerTrendingMovies,adapterTrendingMovies,trending_Movies_w);
         adapterPopularMovies = recyclerCards(recyclerPopularMovies,adapterPopularMovies,popular_Movies);
+        adapterHorrorMovies = recyclerCards(recyclerHorrorMovies,adapterHorrorMovies,horror_Movies);
+        adapterActionMovies = recyclerCards(recyclerActionMovies,adapterActionMovies,action_Movies);
 
         handlerTrendingMovies = new MovieHandler();
         handlerPopularMovies = new MovieHandler();
+        handlerHorrorMovies = new MovieHandler();
+        handlerActionMovies = new MovieHandler();
 
         sliderpager = v.findViewById(R.id.auto_slide);
         indicator = v.findViewById(R.id.indicator);
@@ -137,6 +153,42 @@ public class HomeFragment extends Fragment {
                     objects.put("AdapterMovies",adapterPopularMovies);
                     message.obj = objects;
                     handlerPopularMovies.sendMessage(message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        //Genre of Movies
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // Horror Movies
+                    Message message = new Message();
+                    message.arg1 = MSG_LOAD;
+                    API_Factory factory = API_Factory.getInstance(v.getContext());
+                    API_Movie movie = factory.getAPI_Movie();
+                    horror_Movies = movie.findGenreMovies(27);
+                    message = new Message();
+                    message.arg1 = MSG_HORROR;
+                    HashMap<String,Object> objects = new HashMap<>();
+                    objects.put("HorrorMovies",horror_Movies);
+                    objects.put("AdapterHorrorMovies",adapterHorrorMovies);
+                    message.obj = objects;
+                    handlerHorrorMovies.sendMessage(message);
+
+                    // Action Movie
+                    message = new Message();
+                    action_Movies = movie.findGenreMovies(28);
+                    message = new Message();
+                    message.arg1 = MSG_ACTION;
+                    objects = new HashMap<>();
+                    objects.put("ActionMovies",action_Movies);
+                    objects.put("AdapterActionMovies",adapterActionMovies);
+                    message.obj = objects;
+                    handlerActionMovies.sendMessage(message);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
