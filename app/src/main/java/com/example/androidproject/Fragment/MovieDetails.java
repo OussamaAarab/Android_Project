@@ -3,6 +3,8 @@ package com.example.androidproject.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +17,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.androidproject.Handlers.MovieDetailsHandler;
+import com.example.androidproject.HomeAdapter.AdapterMovies;
 import com.example.androidproject.R;
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;
@@ -22,6 +25,7 @@ import com.example.beans.Genre;
 import com.example.beans.Movie;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -36,10 +40,14 @@ public class MovieDetails extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     Handler handlerMovie = new MovieDetailsHandler();
 
+    RecyclerView recyclerView;
+    AdapterMovies adapterMovies;
+    ArrayList<Movie> movies=new ArrayList<>();
+
+
+
     private String mParam1;
     private String mParam2;
-    public static final int MSG_LOAD = -1;
-    public static final int MSG_START = 1;
     public MovieDetails() {
 
     }
@@ -84,6 +92,14 @@ public class MovieDetails extends Fragment {
         genre[1] = view.findViewById(R.id.mv_dt_gen2);
         genre[2] = view.findViewById(R.id.mv_dt_gen3);
         genre[3] = view.findViewById(R.id.mv_dt_gen4);
+        recyclerView=view.findViewById(R.id.movies_similar);
+        desc.setText("");
+        title.setText("");
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        adapterMovies=new AdapterMovies((movies));
+        recyclerView.setAdapter(adapterMovies);
+
         MovieDetails movieDetails=this;
         new Thread(new Runnable() {
             @Override
@@ -92,19 +108,42 @@ public class MovieDetails extends Fragment {
                 try {
                     factory = API_Factory.getInstance(view.getContext());
                     Message message = new Message();
-                    message.arg1 = MSG_LOAD;
+                    message.arg1 = 1;
                     API_Movie api_movie = factory.getAPI_Movie();
                     Movie movie = api_movie.findMovie(id, null);
                     if(!(movie == null)) {
 
-                        message = new Message();
-                        message.arg1 = MSG_START;
+
                         HashMap<String,Object> objects = new HashMap<>();
                         objects.put("movie",movie);
                         objects.put("movieDetails",movieDetails);
+                        objects.put("adapter",adapterMovies);
                         message.obj = objects;
                         handlerMovie.sendMessage(message);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                API_Factory factory = null;
+                try {
+                    factory = API_Factory.getInstance(view.getContext());
+                    Message message = new Message();
+                    message.arg1 = 2;
+                    API_Movie api_movie = factory.getAPI_Movie();
+
+                    movies=api_movie.findSimilarMovies(id,"","");
+
+                    HashMap<String,Object> objects = new HashMap<>();
+                    objects.put("movies",movies);
+                    objects.put("adapter",adapterMovies);
+                    message.obj = objects;
+                    handlerMovie.sendMessage(message);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -126,6 +165,7 @@ public class MovieDetails extends Fragment {
         {
             s=s+movie.getSpoken_languages()[i].getEnglish_name()+", ";
         }
+        if(!s.isEmpty())
         s=s.substring(0,s.lastIndexOf(','));
         String linkImage = "";
         try {
