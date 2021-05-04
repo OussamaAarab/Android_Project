@@ -206,7 +206,7 @@ public class API_Movie {
         ArrayList<Movie> movies = new ArrayList<>();
 
         OkHttpClient client = new OkHttpClient();
-        HttpUrl.Builder builder = HttpUrl.parse(Movie_Details+id+"similar").newBuilder();
+        HttpUrl.Builder builder = HttpUrl.parse(Movie_Details+id+"/similar").newBuilder();
         builder.addQueryParameter("api_key",factory.getAPI_KEY());
         builder.addQueryParameter("language",lang);
         if(append_to_response!=null){
@@ -222,7 +222,6 @@ public class API_Movie {
         resp = resp.trim();
         Gson gson = new Gson();
         JsonObject entity = gson.fromJson(resp, JsonObject.class);
-
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());
