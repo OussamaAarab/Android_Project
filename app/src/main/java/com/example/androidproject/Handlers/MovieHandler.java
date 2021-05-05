@@ -35,6 +35,18 @@ public class MovieHandler extends Handler {
             AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterMovies");
             adapter.SetData(movies);
         }
+        if (msg.arg1 == HomeFragment.MSG_HORROR) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("HorrorMovies");
+            AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterHorrorMovies");
+            adapter.SetData(movies);
+        }
+        if (msg.arg1 == HomeFragment.MSG_ACTION) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("ActionMovies");
+            AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterActionMovies");
+            adapter.SetData(movies);
+        }
         if (msg.arg1 == HomeFragment.MSG_SLIDE) {
             HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("SlideMovie");

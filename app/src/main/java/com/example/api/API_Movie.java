@@ -32,6 +32,8 @@ public class API_Movie {
     private static final String Popular_Movies = "https://api.themoviedb.org/3/movie/popular";
     private static final String  Movie_Details = "https://api.themoviedb.org/3/movie/";
     private static final String  Latest_Movies = "https://api.themoviedb.org/3/movie/latest";
+    private static final String  Genre_Movies = "https://api.themoviedb.org/3/discover/movie";
+    //https://api.themoviedb.org/3/discover/movie?api_key=cdd42548fd8b23411054cc617a1211de&with_genres=27
 
     public API_Movie(API_Factory factory){ this.factory = factory;}
 
@@ -110,6 +112,34 @@ public class API_Movie {
         builder.addQueryParameter("api_key",factory.getAPI_KEY());
         //builder.addQueryParameter("page",page+"");
         builder.addQueryParameter("language",API_Factory.getLang());
+        String url = builder.build().toString();
+        Log.d(this.getClass().getName(),url);
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        Log.d(API_Movie.class.getName(),"API LIMIT REMAINING : " + response.headers().get("X-RateLimit-Remaining") );
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+
+        JsonArray array = entity.getAsJsonArray("results");
+        for(JsonElement o : array ){
+            Movie m = new Movie(o.getAsJsonObject());
+            movies.add(m);
+        }
+        return movies;
+
+    }
+
+    public ArrayList<Movie> findGenreMovies(int id) throws IOException {
+        ArrayList<Movie> movies = new ArrayList<>();
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(Genre_Movies).newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        //builder.addQueryParameter("page",page+"");
+        builder.addQueryParameter("with_genres",id+"");
         String url = builder.build().toString();
         Log.d(this.getClass().getName(),url);
         Request request = new Request.Builder().url(url).build();
@@ -226,7 +256,7 @@ public class API_Movie {
         ArrayList<Movie> movies = new ArrayList<>();
 
         OkHttpClient client = new OkHttpClient();
-        HttpUrl.Builder builder = HttpUrl.parse(Movie_Details+id+"similar").newBuilder();
+        HttpUrl.Builder builder = HttpUrl.parse(Movie_Details+id+"/similar").newBuilder();
         builder.addQueryParameter("api_key",factory.getAPI_KEY());
         builder.addQueryParameter("language",lang);
         if(append_to_response!=null){
@@ -242,7 +272,6 @@ public class API_Movie {
         resp = resp.trim();
         Gson gson = new Gson();
         JsonObject entity = gson.fromJson(resp, JsonObject.class);
-
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());

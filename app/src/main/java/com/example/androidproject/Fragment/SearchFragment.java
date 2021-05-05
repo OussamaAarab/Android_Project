@@ -34,7 +34,6 @@ public class SearchFragment extends Fragment {
     SearchView searchView;
     FragmentManager fragmentManager;
     ArrayList<Movie> movies = new ArrayList<>();
-    public static final int MSG_LOAD = -1;
     public static final int MSG_START = 1;
     Handler handlerMovie;
 
@@ -70,7 +69,6 @@ public class SearchFragment extends Fragment {
                      try {
 
                          Message message = new Message();
-                         message.arg1 = MSG_LOAD;
 
                          try {
                              API_Factory factory = API_Factory.getInstance(view.getContext());
@@ -102,7 +100,7 @@ public class SearchFragment extends Fragment {
                  public void run() {
                      try {
                          Message message = new Message();
-                         message.arg1 = MSG_LOAD;
+
                          try {
                              API_Factory factory = API_Factory.getInstance(view.getContext());
                              API_Movie api_movie = factory.getAPI_Movie();
@@ -137,13 +135,12 @@ public class SearchFragment extends Fragment {
                         try {
 
                             Message message = new Message();
-                            message.arg1 = MSG_LOAD;
+
 
                             try {
                                 API_Factory factory = API_Factory.getInstance(view.getContext());
                                 API_Movie api_movie = factory.getAPI_Movie();
                                 movies = api_movie.Search_Movie(query,1);
-                                message = new Message();
                                 message.arg1 = MSG_START;
                                 HashMap<String,Object> objects = new HashMap<>();
                                 objects.put("MovieSearch",movies);
@@ -168,13 +165,11 @@ public class SearchFragment extends Fragment {
                     @Override
                     public void run() {
                         try {
-                            Message message = new Message();
-                            message.arg1 = MSG_LOAD;
                             try {
                                 API_Factory factory = API_Factory.getInstance(view.getContext());
                                 API_Movie api_movie = factory.getAPI_Movie();
                                 movies = api_movie.Search_Movie(newText,1);
-                                message = new Message();
+                                Message message = new Message();
                                 message.arg1 = MSG_START;
                                 HashMap<String,Object> objects = new HashMap<>();
                                 objects.put("MovieSearch",movies);
