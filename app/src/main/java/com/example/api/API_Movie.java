@@ -289,7 +289,8 @@ public class API_Movie {
         }
         return reviews;
     }
-    public Trailer GetMovieTrailer(int movie_id, @Nullable String append_to_response) throws IOException {
+
+   /* public Trailer GetMovieTrailer(int movie_id, @Nullable String append_to_response) throws IOException {
         Trailer trailer = null;
 
         OkHttpClient client = new OkHttpClient();
@@ -312,7 +313,7 @@ public class API_Movie {
         JsonObject entity = gson.fromJson(resp, JsonObject.class);
         trailer = new Trailer(entity);
         return trailer;
-    }
+    }*/
 
 
     public String getTrailerKey(int id ) throws IOException {
