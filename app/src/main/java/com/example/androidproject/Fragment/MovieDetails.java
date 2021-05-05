@@ -97,7 +97,7 @@ public class MovieDetails extends Fragment {
         title.setText("");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        adapterMovies=new AdapterMovies((movies));
+        adapterMovies=new AdapterMovies(this.getActivity(),(movies));
         recyclerView.setAdapter(adapterMovies);
 
         MovieDetails movieDetails=this;
