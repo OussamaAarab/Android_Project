@@ -3,6 +3,7 @@ package com.example.androidproject.Handlers;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -22,7 +23,7 @@ public class MovieSearchHandler extends Handler {
     @Override
     public void handleMessage(@NonNull Message msg) {
         super.handleMessage(msg);
-        if (msg.arg1 == SearchFragment.MSG_START) {
+
             HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
             MovieSearchAdapter adapter = (MovieSearchAdapter) objMovie.get("MovieSearchAdapter");
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MovieSearch");
@@ -30,7 +31,6 @@ public class MovieSearchHandler extends Handler {
             adapter.SetData(movies);
             adapter.setRequestedMovie(requestedMovie);
 
-        }
 
 
     }

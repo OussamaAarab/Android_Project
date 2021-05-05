@@ -63,9 +63,10 @@ public class ExampleInstrumentedTest {
         assertNotNull(factory.open());
 =======
 
-        String key = API_Factory.getInstance(appContext).getAPI_Movie().getTrailerKey(399566);
+        Movie m = API_Factory.getInstance(appContext).getAPI_Movie().findMovie(460465,"videos");
+        assertNotEquals(m.getVideos().size(),0);
 
-        Log.d(getClass().getName(),key);
+
 
 >>>>>>> f8502a9fdcd1a4d0e52d737e56df08adda71bc3b
 
