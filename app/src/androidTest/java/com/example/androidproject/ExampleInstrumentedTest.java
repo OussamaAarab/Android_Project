@@ -39,9 +39,10 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.example.androidproject", appContext.getPackageName());
 
-        String key = API_Factory.getInstance(appContext).getAPI_Movie().getTrailerKey(399566);
+        Movie m = API_Factory.getInstance(appContext).getAPI_Movie().findMovie(460465,"videos");
+        assertNotEquals(m.getVideos().size(),0);
 
-        Log.d(getClass().getName(),key);
+
 
 
     }

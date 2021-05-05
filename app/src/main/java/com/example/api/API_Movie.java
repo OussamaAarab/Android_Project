@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 
 import com.example.beans.Movie;
 import com.example.beans.Review;
+import com.example.beans.Video;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -174,6 +175,26 @@ public class API_Movie {
         Gson gson = new Gson();
         JsonObject entity = gson.fromJson(resp, JsonObject.class);
         movie = new Movie(entity);
+        if(append_to_response=="videos"){
+            JsonObject obj = entity.get("videos").getAsJsonObject();
+            JsonArray videos = obj.get("results").getAsJsonArray();
+            ArrayList<Video> vids = new ArrayList<>();
+            for (JsonElement elm : videos){
+                JsonObject vid_Json = elm.getAsJsonObject();
+                Video video = new Video();
+                video.setId(vid_Json.get("id").getAsString());
+                video.setIso_639_1(vid_Json.get("iso_639_1").getAsString());
+                video.setIso_3166_1(vid_Json.get("iso_3166_1").getAsString());
+                video.setKey(vid_Json.get("key").getAsString());
+                video.setName(vid_Json.get("name").getAsString());
+                video.setSite(vid_Json.get("site").getAsString());
+                video.setSize(vid_Json.get("size").getAsInt());
+                video.setType(vid_Json.get("type").getAsString());
+                vids.add(video);
+            }
+            movie.setVideos(vids);
+        }
+
         return movie;
     }
 

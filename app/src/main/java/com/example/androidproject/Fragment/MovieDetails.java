@@ -3,9 +3,12 @@ package com.example.androidproject.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
 import android.os.Message;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +18,15 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.androidproject.Handlers.MovieDetailsHandler;
+import com.example.androidproject.HomeAdapter.AdapterMovies;
+import com.example.androidproject.HomeAdapter.VideoAdapter;
 import com.example.androidproject.R;
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;
 import com.example.beans.Movie;
+import com.example.beans.Video;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -33,6 +40,7 @@ public class MovieDetails extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    RecyclerView recyclerView;
     Handler handlerMovie = new MovieDetailsHandler();
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -45,7 +53,6 @@ public class MovieDetails extends Fragment {
     public MovieDetails(int id) {
         // Required empty public constructor
         this.id=id;
-
     }
 
     /**
@@ -79,7 +86,15 @@ public class MovieDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_movie_details, container, false);
-        Movie movie=null  ;
+        ArrayList<Video> videos = new ArrayList<>();
+        VideoAdapter adapter = new VideoAdapter(videos);
+
+        recyclerView = view.findViewById(R.id.video_rv);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setAdapter(adapter);
+        Log.d(getClass().getName(),"Recycler view shown : " + recyclerView.isShown());
+        Movie movie=null;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -90,7 +105,7 @@ public class MovieDetails extends Fragment {
                     message.arg1 = MSG_LOAD;
                     API_Movie api_movie = factory.getAPI_Movie();
 
-                    Movie movie = api_movie.findMovie(id, null);
+                    Movie movie = api_movie.findMovie(id, "videos");
 
 
                     if(!(movie == null)) {
@@ -111,7 +126,7 @@ public class MovieDetails extends Fragment {
                         String linkImage = "";
                         try {
 
-                            linkImage = API_Factory.getInstance(view.getContext()).getImage_source() + "w500" + movie.getBackdrop_path();
+                            linkImage = API_Factory.getInstance(view.getContext()).getImage_source() + "original" + movie.getBackdrop_path();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -128,6 +143,8 @@ public class MovieDetails extends Fragment {
                         objects.put("imageView",imageView);
                         objects.put("movie",movie);
                         objects.put("ratingBar",ratingBar);
+                        objects.put("video_adapter",adapter);
+
                         message.obj = objects;
                         handlerMovie.sendMessage(message);
                     }

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.androidproject.Fragment.SearchFragment;
+import com.example.androidproject.HomeAdapter.VideoAdapter;
 import com.example.beans.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -40,6 +41,7 @@ public class MovieDetailsHandler extends Handler {
             {
                 genre[i].setText(movie.getGenres()[i].getName());
                 genre[i].setVisibility(View.VISIBLE);
+                if(i==3) break;
             }
 
             String s="";
@@ -58,6 +60,8 @@ public class MovieDetailsHandler extends Handler {
             RatingBar ratingBar=(RatingBar) objMovie.get("ratingBar");
             Picasso.get().load(linkImage).into(imageView);
             ratingBar.setRating(movie.getVote_average()*0.5f);
+            VideoAdapter adapter = (VideoAdapter) objMovie.get("video_adapter");
+            adapter.setData(movie.getVideos());
         }
 
 
