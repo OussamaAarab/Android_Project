@@ -16,7 +16,7 @@ import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemClicked, AdapterMovies.ItemClicked {
+public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemClicked {
 
     BottomNavigationView bottomNav;
     @Override
@@ -60,6 +60,8 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
                     return true;
                 }
             };
+
+
     @Override
     public void onItemClicked(int id) {
 
@@ -71,4 +73,5 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
                 .commit();
 
     }
+
 }

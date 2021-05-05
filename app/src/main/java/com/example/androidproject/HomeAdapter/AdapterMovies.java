@@ -2,6 +2,7 @@ package com.example.androidproject.HomeAdapter;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import com.example.beans.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
+import com.example.androidproject.HomeAdapter.MovieSearchAdapter.ItemClicked;
 public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedViewHolder> {
 
     ArrayList<Movie> movies;
@@ -27,10 +28,7 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
     Context context;
     ItemClicked movieClicked;
 
-    public interface ItemClicked
-    {
-        public void onItemClicked(int id);
-    }
+
 
 
     public AdapterMovies(ArrayList<Movie> movies) {
@@ -53,6 +51,7 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
     public FeaturedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_design, parent, false);
         FeaturedViewHolder featuredViewHolder = new FeaturedViewHolder(view);
+
         return featuredViewHolder;
     }
 
@@ -60,6 +59,8 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
     public void onBindViewHolder(@NonNull FeaturedViewHolder holder, int position) {
 
         Movie movie = movies.get(position);
+        holder.itemView.setTag(movies.get(position));
+
         String linkImage = "";
         try {
             linkImage = API_Factory.getInstance(holder.image.getContext()).getImage_source() + "w500" + movie.getPoster_path();
@@ -90,7 +91,6 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
         ImageView image;
         TextView title,desc,vote,date;
         RatingBar rate;
-
         public FeaturedViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -100,7 +100,7 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
             vote = itemView.findViewById(R.id.card_vote);
             rate = itemView.findViewById(R.id.card_rate);
             date = itemView.findViewById(R.id.card_date);
-
+            movieClicked=(ItemClicked)context;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

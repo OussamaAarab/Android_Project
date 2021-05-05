@@ -211,10 +211,12 @@ public class HomeFragment extends Fragment {
 
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        adapters = new AdapterMovies(movies);
+        adapters = new AdapterMovies(this.getActivity(),movies);
         recycler.setAdapter(adapters);
         return  adapters;
     }
+
+
 
     class SliderTimer extends TimerTask{
 
