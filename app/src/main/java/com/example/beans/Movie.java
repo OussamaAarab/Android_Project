@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+
 public class Movie {
     private JsonObject obj;
     private boolean adult;
@@ -30,6 +32,9 @@ public class Movie {
     private boolean video;
     private float vote_average;
     private int vote_count;
+    private ArrayList<Video> videos;
+
+
 
     public Movie(JsonObject o){
         this.obj = o;
@@ -349,4 +354,11 @@ public class Movie {
         return obj;
     }
 
+    public void setVideos(ArrayList<Video> videos) {
+        this.videos = videos;
+    }
+
+    public ArrayList<Video> getVideos() {
+        return videos;
+    }
 }

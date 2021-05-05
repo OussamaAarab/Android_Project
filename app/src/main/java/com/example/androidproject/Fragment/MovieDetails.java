@@ -20,13 +20,14 @@ import android.widget.TextView;
 
 import com.example.androidproject.Handlers.MovieDetailsHandler;
 import com.example.androidproject.HomeAdapter.AdapterMovies;
-import com.example.androidproject.HomeAdapter.GenreAdapter;
-import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
+import com.example.androidproject.HomeAdapter.*;
+
 import com.example.androidproject.R;
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;
 import com.example.beans.Genre;
 import com.example.beans.Movie;
+import com.example.beans.Video;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class MovieDetails extends Fragment {
     Handler handlerMovie = new MovieDetailsHandler();
 
     RecyclerView recyclerView;
+    RecyclerView video_recyclerView;
     AdapterMovies adapterMovies;
     ArrayList<Movie> movies=new ArrayList<>();
 
@@ -94,6 +96,7 @@ public class MovieDetails extends Fragment {
         title =view.findViewById(R.id.mv_dt_title);
         desc=view.findViewById(R.id.mv_dt_desc);
         release=view.findViewById(R.id.mv_dt_release);
+        video_recyclerView = view.findViewById(R.id.video_rv);
         vote_nb=view.findViewById(R.id.mv_dt_nb);
         languageSpoken=view.findViewById(R.id.mv_dt_language);
 
@@ -103,8 +106,16 @@ public class MovieDetails extends Fragment {
         title.setText("");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        adapterMovies=new AdapterMovies((movies));
+        adapterMovies=new AdapterMovies(this.getActivity(),(movies));
         recyclerView.setAdapter(adapterMovies);
+        ArrayList<Video> videos = new ArrayList<>();
+        VideoAdapter adapter = new VideoAdapter(videos);
+
+        video_recyclerView = view.findViewById(R.id.video_rv);
+        video_recyclerView.setHasFixedSize(true);
+        video_recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        video_recyclerView.setAdapter(adapter);
+        Log.d(getClass().getName(),"Recycler view shown : " + video_recyclerView.isShown());
 
         recyclerView.setHasFixedSize(true);
         manager=new LinearLayoutManager(view.getContext());
@@ -120,7 +131,7 @@ public class MovieDetails extends Fragment {
                     Message message = new Message();
                     message.arg1 = 1;
                     API_Movie api_movie = factory.getAPI_Movie();
-                    Movie movie = api_movie.findMovie(id, null);
+                    Movie movie = api_movie.findMovie(id, "videos");
                     if(!(movie == null)) {
 
 
@@ -128,6 +139,7 @@ public class MovieDetails extends Fragment {
                         objects.put("movie",movie);
                         objects.put("movieDetails",movieDetails);
                         objects.put("adapter",adapterMovies);
+                        objects.put("video_adapter",adapter);
                         message.obj = objects;
                         handlerMovie.sendMessage(message);
                     }
@@ -167,6 +179,7 @@ public class MovieDetails extends Fragment {
     {/*
         for(int i=0;i<movie.getGenres().length;i++)
         {
+            if(i==3) break;
             genre[i].setText(movie.getGenres()[i].getName());
             genre[i].setVisibility(View.VISIBLE);
         }
@@ -185,7 +198,7 @@ public class MovieDetails extends Fragment {
             s=s+movie.getSpoken_languages()[i].getEnglish_name()+", ";
         }
         if(!s.isEmpty())
-        s=s.substring(0,s.lastIndexOf(','));
+            s=s.substring(0,s.lastIndexOf(','));
         String linkImage = "";
         try {
 

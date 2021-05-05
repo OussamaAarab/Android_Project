@@ -10,10 +10,15 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 
+import com.example.androidproject.HomeAdapter.AdapterMovies;
+import com.example.androidproject.HomeAdapter.VideoAdapter;
 import com.example.androidproject.R;
 import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
 
+import com.example.beans.Video;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
 
 public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemClicked {
 
@@ -59,10 +64,12 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
                     return true;
                 }
             };
+
+
     @Override
     public void onItemClicked(int id) {
 
-        Fragment fragment=new com.example.androidproject.Fragment.MovieDetails(id);
+        Fragment fragment = new com.example.androidproject.Fragment.MovieDetails(id);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment, null)
@@ -70,4 +77,6 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
                 .commit();
 
     }
+
 }
+

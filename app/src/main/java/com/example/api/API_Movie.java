@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 
 import com.example.beans.Movie;
 import com.example.beans.Review;
+import com.example.beans.Video;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -28,9 +29,11 @@ public class API_Movie {
     private API_Factory factory;
     private static final String Search = "https://api.themoviedb.org/3/search/movie";
     private static final String Trending_Movies = "https://api.themoviedb.org/3/trending/movie/";
-    private static final String Popular_Movies = "https://api.themoviedb.org/3/movie/popular/";
+    private static final String Popular_Movies = "https://api.themoviedb.org/3/movie/popular";
     private static final String  Movie_Details = "https://api.themoviedb.org/3/movie/";
     private static final String  Latest_Movies = "https://api.themoviedb.org/3/movie/latest";
+    private static final String  Genre_Movies = "https://api.themoviedb.org/3/discover/movie";
+    //https://api.themoviedb.org/3/discover/movie?api_key=cdd42548fd8b23411054cc617a1211de&with_genres=27
 
     public API_Movie(API_Factory factory){ this.factory = factory;}
 
@@ -110,7 +113,35 @@ public class API_Movie {
         //builder.addQueryParameter("page",page+"");
         builder.addQueryParameter("language",API_Factory.getLang());
         String url = builder.build().toString();
+        Log.d(this.getClass().getName(),url);
+        Request request = new Request.Builder().url(url).build();
 
+        Response response = client.newCall(request).execute();
+        Log.d(API_Movie.class.getName(),"API LIMIT REMAINING : " + response.headers().get("X-RateLimit-Remaining") );
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+
+        JsonArray array = entity.getAsJsonArray("results");
+        for(JsonElement o : array ){
+            Movie m = new Movie(o.getAsJsonObject());
+            movies.add(m);
+        }
+        return movies;
+
+    }
+
+    public ArrayList<Movie> findGenreMovies(int id) throws IOException {
+        ArrayList<Movie> movies = new ArrayList<>();
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(Genre_Movies).newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        //builder.addQueryParameter("page",page+"");
+        builder.addQueryParameter("with_genres",id+"");
+        String url = builder.build().toString();
+        Log.d(this.getClass().getName(),url);
         Request request = new Request.Builder().url(url).build();
 
         Response response = client.newCall(request).execute();
@@ -131,7 +162,6 @@ public class API_Movie {
     }
 
     public JsonObject findTrendingMoviesJson(String time_window,int page) throws IOException {
-        ArrayList<Movie> movies = new ArrayList<>();
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder builder = HttpUrl.parse(Trending_Movies+time_window).newBuilder();
         builder.addQueryParameter("api_key",factory.getAPI_KEY());
@@ -175,6 +205,26 @@ public class API_Movie {
         Gson gson = new Gson();
         JsonObject entity = gson.fromJson(resp, JsonObject.class);
         movie = new Movie(entity);
+        if(append_to_response=="videos"){
+            JsonObject obj = entity.get("videos").getAsJsonObject();
+            JsonArray videos = obj.get("results").getAsJsonArray();
+            ArrayList<Video> vids = new ArrayList<>();
+            for (JsonElement elm : videos){
+                JsonObject vid_Json = elm.getAsJsonObject();
+                Video video = new Video();
+                video.setId(vid_Json.get("id").getAsString());
+                video.setIso_639_1(vid_Json.get("iso_639_1").getAsString());
+                video.setIso_3166_1(vid_Json.get("iso_3166_1").getAsString());
+                video.setKey(vid_Json.get("key").getAsString());
+                video.setName(vid_Json.get("name").getAsString());
+                video.setSite(vid_Json.get("site").getAsString());
+                video.setSize(vid_Json.get("size").getAsInt());
+                video.setType(vid_Json.get("type").getAsString());
+                vids.add(video);
+            }
+            movie.setVideos(vids);
+        }
+
         return movie;
     }
 
@@ -287,6 +337,35 @@ public class API_Movie {
             reviews.add(r);
         }
         return reviews;
+    }
+
+    public String getTrailerKey(int id ) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(Movie_Details+id+"/videos").newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+
+        String url = builder.build().toString();
+        Log.d(getClass().getName(),url);
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+
+        JsonArray array = entity.getAsJsonArray("results");
+        for (JsonElement res : array){
+            JsonObject res_ = res.getAsJsonObject();
+            if(res_.get("type").getAsString().equals("Trailer")){
+                return res_.get("key").getAsString();
+            }
+        }
+        return "";
+
+
     }
 
 }

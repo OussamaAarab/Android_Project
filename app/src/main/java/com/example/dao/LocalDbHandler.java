@@ -8,6 +8,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,21 +21,25 @@ public class LocalDbHandler extends SQLiteOpenHelper {
         super(context, name, factory, version);
         try {
            InputStream in =  context.getAssets().open("Sqlite/OnCreateDb.sql");
-           byte[] b = new byte[100];
-           while (in.read(b)>0){
-                String s = new String(b);
+            BufferedInputStream buffin = new BufferedInputStream(in);
+           byte[] b = new byte[1024];
+           int read;
+           while ((read = buffin.read(b))>0){
+                String s = new String(b,0,read);
                 onCreateScript += s;
            }
            in.close();
+           buffin.close();
 
             in =  context.getAssets().open("Sqlite/OnUpdateDb.sql");
-            b = new byte[100];
-            while (in.read(b)>0){
-                String s = new String(b);
+            buffin = new BufferedInputStream(in);
+            b = new byte[1024];
+            while ((read = buffin.read(b))>0){
+                String s = new String(b,0,read);
                 onUpdateScript +=s;
             }
-
-
+            in.close();
+            buffin.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,13 +48,36 @@ public class LocalDbHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(LocalDbHandler.class.getName(),"Query : " + onCreateScript);
-        db.execSQL(onCreateScript);
+
+        String[] queries = onCreateScript.split(";");
+        for (String q : queries){
+            Log.d(LocalDbHandler.class.getName(),"Query : " + q);
+            if(q.trim().length()>0){
+                db.execSQL(q+";");
+            }
+        }
+
+
+
+
+
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d(LocalDbHandler.class.getName(),"Query : " + onUpdateScript);
-        db.execSQL(onUpdateScript);
+        String[] queries = onUpdateScript.split(";");
+        for (String q : queries){
+            Log.d(LocalDbHandler.class.getName(),"Query : " + q);
+            if(q.trim().length()>0){
+                db.execSQL(q+";");
+            }
+        }
+
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        onUpgrade(db,oldVersion,newVersion);
     }
 }
