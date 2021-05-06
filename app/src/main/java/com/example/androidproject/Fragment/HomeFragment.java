@@ -37,17 +37,35 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerPopularMovies;
     RecyclerView recyclerHorrorMovies;
     RecyclerView recyclerActionMovies;
+    RecyclerView recyclerAdventureMovies;
+    RecyclerView recyclerComedyMovies;
+    RecyclerView recyclerDramaMovies;
+    RecyclerView recyclerWarMovies;
+    RecyclerView recyclerRomanceMovies;
+    RecyclerView recyclerDocumentaryMovies;
 
     AdapterMovies adapterTrendingMovies;
     AdapterMovies adapterPopularMovies;
     AdapterMovies adapterHorrorMovies;
     AdapterMovies adapterActionMovies;
+    AdapterMovies adapterAdventureMovies;
+    AdapterMovies adapterComedyMovies;
+    AdapterMovies adapterDramaMovies;
+    AdapterMovies adapterRomanceMovies;
+    AdapterMovies adapterWarMovies;
+    AdapterMovies adapterDocumentaryMovies;
     SlideAdapter slideAdapter;
 
     MovieHandler handlerTrendingMovies;
     MovieHandler handlerPopularMovies;
     MovieHandler handlerHorrorMovies;
     MovieHandler handlerActionMovies;
+    MovieHandler handlerAdventureMovies;
+    MovieHandler handlerComedyMovies;
+    MovieHandler handlerDramaMovies;
+    MovieHandler handlerRomanceMovies;
+    MovieHandler handlerWarMovies;
+    MovieHandler handlerDocumentaryMovies;
 
     public static final int MSG_LOAD = -1;
     public static final int MSG_START = 1;
@@ -55,12 +73,24 @@ public class HomeFragment extends Fragment {
     public static final int MSG_POPULAR = 3;
     public static final int MSG_HORROR = 5;
     public static final int MSG_ACTION = 6;
+    public static final int MSG_ADVENTURE = 7;
+    public static final int MSG_COMEDY = 8;
+    public static final int MSG_DRAMA = 9;
+    public static final int MSG_ROMANCE = 10;
+    public static final int MSG_WAR = 11;
+    public static final int MSG_DOCUMENTARY = 12;
 
     ArrayList<Movie> trending_Movies_w = new ArrayList<>();
     ArrayList<Movie> trending_Movies_d = new ArrayList<>();
     ArrayList<Movie> popular_Movies = new ArrayList<>();
     ArrayList<Movie> horror_Movies = new ArrayList<>();
     ArrayList<Movie> action_Movies = new ArrayList<>();
+    ArrayList<Movie> adventure_Movies = new ArrayList<>();
+    ArrayList<Movie> comedy_Movies = new ArrayList<>();
+    ArrayList<Movie> drama_Movies = new ArrayList<>();
+    ArrayList<Movie> romance_Movies = new ArrayList<>();
+    ArrayList<Movie> war_Movies = new ArrayList<>();
+    ArrayList<Movie> documentary_Movies = new ArrayList<>();
 
     private List<Movie> liste_Slide;
     private ViewPager sliderpager;
@@ -75,17 +105,35 @@ public class HomeFragment extends Fragment {
         recyclerPopularMovies = v.findViewById(R.id.recycler_popular_series);
         recyclerHorrorMovies = v.findViewById(R.id.recycler_horror_movie);
         recyclerActionMovies = v.findViewById(R.id.recycler_action_movie);
+        recyclerAdventureMovies = v.findViewById(R.id.recycler_adventure_movie);
+        recyclerComedyMovies = v.findViewById(R.id.recycler_comedy_movie);
+        recyclerDramaMovies = v.findViewById(R.id.recycler_drama_movie);
+        recyclerRomanceMovies = v.findViewById(R.id.recycler_romance_movie);
+        recyclerWarMovies = v.findViewById(R.id.recycler_war_movie);
+        recyclerDocumentaryMovies = v.findViewById(R.id.recycler_documentary_movie);
         scrollView = v.findViewById(R.id.scrollView_Home);
 
         adapterTrendingMovies = recyclerCards(recyclerTrendingMovies,adapterTrendingMovies,trending_Movies_w);
         adapterPopularMovies = recyclerCards(recyclerPopularMovies,adapterPopularMovies,popular_Movies);
         adapterHorrorMovies = recyclerCards(recyclerHorrorMovies,adapterHorrorMovies,horror_Movies);
         adapterActionMovies = recyclerCards(recyclerActionMovies,adapterActionMovies,action_Movies);
+        adapterAdventureMovies = recyclerCards(recyclerAdventureMovies,adapterAdventureMovies,adventure_Movies);
+        adapterComedyMovies = recyclerCards(recyclerComedyMovies,adapterComedyMovies,comedy_Movies);
+        adapterDramaMovies = recyclerCards(recyclerDramaMovies,adapterDramaMovies,drama_Movies);
+        adapterRomanceMovies = recyclerCards(recyclerRomanceMovies,adapterRomanceMovies,romance_Movies);
+        adapterWarMovies = recyclerCards(recyclerWarMovies,adapterWarMovies,war_Movies);
+        adapterDocumentaryMovies = recyclerCards(recyclerDocumentaryMovies,adapterDocumentaryMovies,documentary_Movies);
 
         handlerTrendingMovies = new MovieHandler();
         handlerPopularMovies = new MovieHandler();
         handlerHorrorMovies = new MovieHandler();
         handlerActionMovies = new MovieHandler();
+        handlerAdventureMovies = new MovieHandler();
+        handlerComedyMovies = new MovieHandler();
+        handlerDramaMovies = new MovieHandler();
+        handlerRomanceMovies = new MovieHandler();
+        handlerWarMovies = new MovieHandler();
+        handlerDocumentaryMovies = new MovieHandler();
 
         sliderpager = v.findViewById(R.id.auto_slide);
         indicator = v.findViewById(R.id.indicator);
@@ -188,6 +236,72 @@ public class HomeFragment extends Fragment {
                     objects.put("AdapterActionMovies",adapterActionMovies);
                     message.obj = objects;
                     handlerActionMovies.sendMessage(message);
+
+                    // Adventure Movie
+                    message = new Message();
+                    adventure_Movies = movie.findGenreMovies(12);
+                    message = new Message();
+                    message.arg1 = MSG_ADVENTURE;
+                    objects = new HashMap<>();
+                    objects.put("AdventureMovies",adventure_Movies);
+                    objects.put("AdapterAdventureMovies",adapterAdventureMovies);
+                    message.obj = objects;
+                    handlerAdventureMovies.sendMessage(message);
+
+                    // Comedy Movie
+                    message = new Message();
+                    comedy_Movies = movie.findGenreMovies(35);
+                    message = new Message();
+                    message.arg1 = MSG_COMEDY;
+                    objects = new HashMap<>();
+                    objects.put("ComedyMovies",comedy_Movies);
+                    objects.put("AdapterComedyMovies",adapterComedyMovies);
+                    message.obj = objects;
+                    handlerComedyMovies.sendMessage(message);
+
+                    // Drama Movie
+                    message = new Message();
+                    drama_Movies = movie.findGenreMovies(18);
+                    message = new Message();
+                    message.arg1 = MSG_DRAMA;
+                    objects = new HashMap<>();
+                    objects.put("DramaMovies",drama_Movies);
+                    objects.put("AdapterDramaMovies",adapterDramaMovies);
+                    message.obj = objects;
+                    handlerDramaMovies.sendMessage(message);
+
+                    // Romance Movie
+                    message = new Message();
+                    romance_Movies = movie.findGenreMovies(10749);
+                    message = new Message();
+                    message.arg1 = MSG_ROMANCE;
+                    objects = new HashMap<>();
+                    objects.put("RomanceMovies",romance_Movies);
+                    objects.put("AdapterRomanceMovies",adapterRomanceMovies);
+                    message.obj = objects;
+                    handlerRomanceMovies.sendMessage(message);
+
+                    // War Movie
+                    message = new Message();
+                    war_Movies = movie.findGenreMovies(10752);
+                    message = new Message();
+                    message.arg1 = MSG_WAR;
+                    objects = new HashMap<>();
+                    objects.put("WarMovies",war_Movies);
+                    objects.put("AdapterWarMovies",adapterWarMovies);
+                    message.obj = objects;
+                    handlerWarMovies.sendMessage(message);
+
+                    // Documentary Movie
+                    message = new Message();
+                    documentary_Movies = movie.findGenreMovies(99);
+                    message = new Message();
+                    message.arg1 = MSG_DOCUMENTARY;
+                    objects = new HashMap<>();
+                    objects.put("DocumentaryMovies",documentary_Movies);
+                    objects.put("AdapterDocumentaryMovies",adapterDocumentaryMovies);
+                    message.obj = objects;
+                    handlerDocumentaryMovies.sendMessage(message);
 
                 } catch (Exception e) {
                     e.printStackTrace();

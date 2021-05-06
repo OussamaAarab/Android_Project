@@ -47,6 +47,42 @@ public class MovieHandler extends Handler {
             AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterActionMovies");
             adapter.SetData(movies);
         }
+        if (msg.arg1 == HomeFragment.MSG_ADVENTURE) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("AdventureMovies");
+            AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterAdventureMovies");
+            adapter.SetData(movies);
+        }
+        if (msg.arg1 == HomeFragment.MSG_COMEDY) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("ComedyMovies");
+            AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterComedyMovies");
+            adapter.SetData(movies);
+        }
+        if (msg.arg1 == HomeFragment.MSG_DRAMA) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("DramaMovies");
+            AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterDramaMovies");
+            adapter.SetData(movies);
+        }
+        if (msg.arg1 == HomeFragment.MSG_ROMANCE) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("RomanceMovies");
+            AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterRomanceMovies");
+            adapter.SetData(movies);
+        }
+        if (msg.arg1 == HomeFragment.MSG_WAR) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("WarMovies");
+            AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterWarMovies");
+            adapter.SetData(movies);
+        }
+        if (msg.arg1 == HomeFragment.MSG_DOCUMENTARY) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("DocumentaryMovies");
+            AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterDocumentaryMovies");
+            adapter.SetData(movies);
+        }
         if (msg.arg1 == HomeFragment.MSG_SLIDE) {
             HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("SlideMovie");
