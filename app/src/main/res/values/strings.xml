@@ -9,6 +9,12 @@
     <string name="show_more">Show more</string>
     <string name="horror_movies">Horror Movies</string>
     <string name="action_movies">Action Movies</string>
+    <string name="adventure_movies">Adventure Movies</string>
+    <string name="comedy_movies">Comedy Movies</string>
+    <string name="drama_movies">Drama Movies</string>
+    <string name="romance_movies">Romance Movies</string>
+    <string name="war_movies">War Movies</string>
+    <string name="documentary_movies">Documentary Movies</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
