@@ -29,7 +29,7 @@ import java.util.HashMap;
 
 public class VideoFragment extends Fragment {
 
-    public static final int MSG_START_TRENDING_TRAILER = 10;
+    public static final int MSG_START_TRENDING_TRAILER = 13;
 
     RecyclerView week_trending_rv;
     TrailerAdapter week_trending_adapter;
@@ -43,17 +43,17 @@ public class VideoFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_video, container, false);
 
         week_trending_rv = v.findViewById(R.id.recycler_popular_movies_week_trailers);
-        week_trending_adapter = recyclerCards(week_trending_rv,week_trending_adapter,trending_Movies_w);
+        this.week_trending_adapter = recyclerCards(week_trending_rv,trending_Movies_w);
         LoadData();
 
         return v;
     }
 
-    private TrailerAdapter recyclerCards(RecyclerView recycler , TrailerAdapter adapters, ArrayList<Movie> movies) {
+    private TrailerAdapter recyclerCards(RecyclerView recycler , ArrayList<Movie> movies) {
 
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        adapters = new TrailerAdapter(getActivity(),movies);
+        TrailerAdapter adapters = new TrailerAdapter(getActivity(),movies);
         recycler.setAdapter(adapters);
         return  adapters;
     }
@@ -70,7 +70,7 @@ public class VideoFragment extends Fragment {
                     message.arg1 = MSG_START_TRENDING_TRAILER;
                     HashMap<String,Object> objects = new HashMap<>();
                     objects.put("MoviesList",trending_Movies_w);
-                    objects.put("AdapterMovies",week_trending_adapter);
+                    objects.put("AdapterMovies",VideoFragment.this.week_trending_adapter);
                     message.obj = objects;
                     handler.sendMessage(message);
 
