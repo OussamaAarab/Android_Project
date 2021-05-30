@@ -37,7 +37,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.Featured
     @NonNull
     @Override
     public TrailerAdapter.FeaturedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.video_card_2, parent, false);
         TrailerAdapter.FeaturedViewHolder featuredViewHolder = new TrailerAdapter.FeaturedViewHolder(view);
 
         Log.d(getClass().getName(),"Recycler View Created ");
