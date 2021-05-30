@@ -2,7 +2,9 @@ package com.example.androidproject.Fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +20,8 @@ import android.widget.TextView;
 
 import com.example.androidproject.Handlers.MovieDetailsHandler;
 import com.example.androidproject.HomeAdapter.AdapterMovies;
-import com.example.androidproject.HomeAdapter.VideoAdapter;
+import com.example.androidproject.HomeAdapter.*;
+
 import com.example.androidproject.R;
 import com.example.api.API_Factory;
 import com.example.api.API_Movie;
@@ -35,7 +38,7 @@ public class MovieDetails extends Fragment {
     int id;
     View view;
     TextView title,desc,release,vote_nb,languageSpoken;
-    TextView [] genre=new TextView[4];
+
     ImageView imageView;
     RatingBar ratingBar;
     private static final String ARG_PARAM1 = "param1";
@@ -47,6 +50,10 @@ public class MovieDetails extends Fragment {
     AdapterMovies adapterMovies;
     ArrayList<Movie> movies=new ArrayList<>();
 
+    RecyclerView recyclerView1;
+    GenreAdapter adapter;
+    RecyclerView.LayoutManager manager;
+    FragmentManager fragmentManager;
 
 
     private String mParam1;
@@ -92,11 +99,9 @@ public class MovieDetails extends Fragment {
         video_recyclerView = view.findViewById(R.id.video_rv);
         vote_nb=view.findViewById(R.id.mv_dt_nb);
         languageSpoken=view.findViewById(R.id.mv_dt_language);
-        genre[0] = view.findViewById(R.id.mv_dt_gen1);
-        genre[1] = view.findViewById(R.id.mv_dt_gen2);
-        genre[2] = view.findViewById(R.id.mv_dt_gen3);
-        genre[3] = view.findViewById(R.id.mv_dt_gen4);
+
         recyclerView=view.findViewById(R.id.movies_similar);
+        recyclerView1=view.findViewById(R.id.mv_dt_gn);
         desc.setText("");
         title.setText("");
         recyclerView.setHasFixedSize(true);
@@ -111,6 +116,10 @@ public class MovieDetails extends Fragment {
         video_recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         video_recyclerView.setAdapter(adapter);
         Log.d(getClass().getName(),"Recycler view shown : " + video_recyclerView.isShown());
+
+        recyclerView.setHasFixedSize(true);
+        manager=new LinearLayoutManager(view.getContext());
+        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
 
         MovieDetails movieDetails=this;
         new Thread(new Runnable() {
@@ -167,13 +176,22 @@ public class MovieDetails extends Fragment {
     }
 
     public void setData(Movie movie)
-    {
+    {/*
         for(int i=0;i<movie.getGenres().length;i++)
         {
             if(i==3) break;
             genre[i].setText(movie.getGenres()[i].getName());
             genre[i].setVisibility(View.VISIBLE);
         }
+
+        */
+
+            ArrayList<Genre> genres=new ArrayList<>();
+            for (int i=0;i<movie.getGenres().length;i++)
+            {
+                genres.add(movie.getGenres()[i]);
+            }
+
         String s="";
         for(int i=0;i<movie.getSpoken_languages().length;i++)
         {
@@ -193,6 +211,9 @@ public class MovieDetails extends Fragment {
         title.setText(movie.getTitle());
         vote_nb.setText(""+movie.getVote_count());
         desc.setText(movie.getOverview());
+        adapter=new GenreAdapter(this.getActivity(),genres);
+        recyclerView1.setAdapter(adapter);
+
         release.setText(movie.getRelease_date());
         languageSpoken.setText(s);
 

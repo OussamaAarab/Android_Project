@@ -91,70 +91,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/mv_dt_title" />
 
-                <TextView
-                    android:id="@+id/mv_dt_gen1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:autoSizeTextType="uniform"
-                    android:background="@drawable/gradient_background"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="TextView"
-                    android:visibility="invisible"
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mv_dt_gn"
+                    android:layout_width="389dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.084"
+                    app:layout_constraintHorizontal_bias="0.0"
+
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mv_dt_desc" />
-
-                <TextView
-                    android:id="@+id/mv_dt_gen2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-
-                    android:autoSizeTextType="uniform"
-                    android:background="@drawable/gradient_background"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="TextView"
-                    android:visibility="invisible"
-                    app:layout_constraintStart_toEndOf="@+id/mv_dt_gen1"
-                    app:layout_constraintTop_toBottomOf="@+id/mv_dt_desc" />
-
-
-                <TextView
-                    android:id="@+id/mv_dt_gen3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:autoSizeTextType="uniform"
-                    android:background="@drawable/gradient_background"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="TextView3"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.095"
-                    app:layout_constraintStart_toEndOf="@+id/mv_dt_gen2"
-                    app:layout_constraintTop_toBottomOf="@+id/mv_dt_desc" />
-
-                <TextView
-                    android:id="@+id/mv_dt_gen4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="16dp"
-                    android:autoSizeTextType="uniform"
-                    android:background="@drawable/gradient_background"
-                    android:gravity="center"
-                    android:padding="5dp"
-                    android:text="TextView3"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.285"
-                    app:layout_constraintStart_toEndOf="@+id/mv_dt_gen3"
                     app:layout_constraintTop_toBottomOf="@+id/mv_dt_desc" />
 
                 <TextView
@@ -162,26 +110,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
                     android:text="release:"
-                    android:textSize="14sp"
 
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mv_dt_gen1" />
+                    app:layout_constraintTop_toBottomOf="@+id/mv_dt_gn" />
 
                 <TextView
                     android:id="@+id/mv_dt_release"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="12dp"
                     android:text="22-2-2022"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.063"
+                    app:layout_constraintHorizontal_bias="0.048"
                     app:layout_constraintStart_toEndOf="@+id/mv_dt_rel"
-                    app:layout_constraintTop_toBottomOf="@+id/mv_dt_gen2" />
+                    app:layout_constraintTop_toBottomOf="@+id/mv_dt_gn" />
 
                 <TextView
                     android:id="@+id/mv_dt_lang"
