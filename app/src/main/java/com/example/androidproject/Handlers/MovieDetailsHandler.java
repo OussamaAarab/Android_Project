@@ -43,8 +43,12 @@ public class MovieDetailsHandler extends Handler {
         {
             HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
             ArrayList<Movie> movies=(ArrayList<Movie> )objMovie.get("movies");
+            MovieDetails movieDetails = (MovieDetails) objMovie.get("movieDetails");
             AdapterMovies adapterMovies=(AdapterMovies) objMovie.get("adapter");
             adapterMovies.SetData(movies);
+            if(movies.isEmpty())
+            movieDetails.similarMovie(false);
+
 
 
         }
