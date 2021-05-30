@@ -69,7 +69,7 @@ public class SearchFragment extends Fragment {
         recyclerViewPopular=view.findViewById(R.id.popular_movies);
         recyclerViewPopular.setHasFixedSize(true);
         recyclerViewPopular.setLayoutManager(new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL,false));
-        adapterPopular=new AdapterMovies(this.getActivity(),(movies));
+        adapterPopular=new AdapterMovies(this.getActivity(),movies, 0);
         recyclerViewPopular.setAdapter(adapterPopular);
 
         handlerMovie = new MovieSearchHandler();

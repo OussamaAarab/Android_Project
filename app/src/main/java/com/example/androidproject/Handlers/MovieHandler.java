@@ -99,10 +99,10 @@ public class MovieHandler extends Handler {
             // TODO : Traitement du chargement
 
         }
-        if(msg.arg1 == SlideAdapter.MSG_SLIDE_CLICK){
+        if (msg.arg1 == SlideAdapter.MSG_SLIDE_CLICK) {
             String key = (String) msg.obj;
             Intent i = new Intent(context, VideoPlayerActivity.class);
-            i.putExtra("key",key);
+            i.putExtra("key", key);
             context.startActivity(i);
         }
 
@@ -117,7 +117,7 @@ public class MovieHandler extends Handler {
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
             AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterMovies");
             adapter.AddData(movies);
-
+        }
         if (msg.arg1 == VideoFragment.MSG_START_TRENDING_TRAILER) {
             HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
