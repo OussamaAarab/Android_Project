@@ -97,6 +97,7 @@ public class MovieDetails extends Fragment {
 
         desc.setText("");
         title.setText("");
+
         languageSpoken.setText("");
         release.setText("");
         vote_nb.setText("");
@@ -104,8 +105,9 @@ public class MovieDetails extends Fragment {
 
         recyclerViewSimilar.setHasFixedSize(true);
         recyclerViewSimilar.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        adapterMovies=new AdapterMovies(this.getActivity(),(movies));
+        adapterMovies=new AdapterMovies(this.getActivity(),movies, 0);
         recyclerViewSimilar.setAdapter(adapterMovies);
+
         ArrayList<Video> videos = new ArrayList<>();
         VideoAdapter adapter = new VideoAdapter(videos);
 
