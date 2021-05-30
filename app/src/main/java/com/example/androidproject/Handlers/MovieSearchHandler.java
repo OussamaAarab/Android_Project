@@ -39,7 +39,7 @@ public class MovieSearchHandler extends Handler {
                 HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
 
                 ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("movies");
-                AdapterMovies adapterMovies = (AdapterMovies) objMovie.get("adapterPopular");
+                MovieSearchAdapter adapterMovies = (MovieSearchAdapter) objMovie.get("adapterPopular");
                 adapterMovies.SetData(movies);
 
 

@@ -34,7 +34,6 @@ public class SearchFragment extends Fragment {
     View view;
     RecyclerView recyclerViewSearch,recyclerViewPopular;
     MovieSearchAdapter adapterSearch;
-    AdapterMovies  adapterPopular;
     TextView textView;
     RecyclerView.LayoutManager managerSearch;
     SearchView searchView;
@@ -66,11 +65,7 @@ public class SearchFragment extends Fragment {
         adapterSearch =new MovieSearchAdapter(this.getActivity(),movies);
         recyclerViewSearch.setAdapter(adapterSearch);
 
-        recyclerViewPopular=view.findViewById(R.id.popular_movies);
-        recyclerViewPopular.setHasFixedSize(true);
-        recyclerViewPopular.setLayoutManager(new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL,false));
-        adapterPopular=new AdapterMovies(this.getActivity(),movies, 0);
-        recyclerViewPopular.setAdapter(adapterPopular);
+
 
         handlerMovie = new MovieSearchHandler();
 
@@ -86,7 +81,7 @@ public class SearchFragment extends Fragment {
                     movies=api_movie.findPopularMovies();
                     HashMap<String,Object> objects = new HashMap<>();
                     objects.put("movies",movies);
-                    objects.put("adapterPopular",adapterPopular);
+                    objects.put("adapterPopular",adapterSearch);
                     message.obj = objects;
                     handlerMovie.sendMessage(message);
 
@@ -131,7 +126,7 @@ public class SearchFragment extends Fragment {
 
          @Override
          public boolean onQueryTextChange(String newText) {
-             textView.setVisibility(View.GONE);
+             textView.setText("Search results: ");
              new Thread(new Runnable() {
                  @Override
                  public void run() {
