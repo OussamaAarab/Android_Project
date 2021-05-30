@@ -1,11 +1,15 @@
 package com.example.androidproject.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -309,7 +313,42 @@ public class HomeFragment extends Fragment {
             }
         }).start();
 
+        // Show More Movies
+        SpannableString content = new SpannableString("Show more");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        TextView moreTrendingMovies = (TextView) v.findViewById(R.id.more_treding_movies);
+        TextView morePopularMovies = (TextView) v.findViewById(R.id.more_popular_movies);
+        TextView moreHorrorMovies = (TextView) v.findViewById(R.id.more_horror_movies);
+        TextView moreActionMovies = (TextView) v.findViewById(R.id.more_action_movies);
+        TextView moreAdventureMovies = (TextView) v.findViewById(R.id.more_adventure_movies);
+        TextView moreComedyMovies = (TextView) v.findViewById(R.id.more_comedy_movies);
+        TextView moreDramaMovies = (TextView) v.findViewById(R.id.more_drama_movies);
+        TextView moreRomanceMovies = (TextView) v.findViewById(R.id.more_romance_movies);
+        TextView moreWarMovies = (TextView) v.findViewById(R.id.more_war_movies);
+        TextView moreDocumentaryMovies = (TextView) v.findViewById(R.id.more_documentary_movies);
 
+        moreTrendingMovies.setText(content);
+        morePopularMovies.setText(content);
+
+        moreTrendingMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getActivity(),SecondActivity.class);
+                activity.putExtra("gender", SecondActivity.TRENDING);
+                startActivity(activity);
+            }
+        });
+        morePopularMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getActivity(),SecondActivity.class);
+                activity.putExtra("gender", SecondActivity.POPULAR);
+                startActivity(activity);
+            }
+        });
+
+
+        // Set Focus on ScrollView
         scrollView.post(new Runnable() {
             @Override
             public void run() {
@@ -317,7 +356,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Set Focus on ScrollView
         recyclerTrendingMovies.setFocusable(false);
         recyclerPopularMovies.setFocusable(false);
         recyclerHorrorMovies.setFocusable(false);
@@ -338,7 +376,7 @@ public class HomeFragment extends Fragment {
 
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        adapters = new AdapterMovies(this.getActivity(),movies);
+        adapters = new AdapterMovies(this.getActivity(), movies, 0);
         recycler.setAdapter(adapters);
         return  adapters;
     }

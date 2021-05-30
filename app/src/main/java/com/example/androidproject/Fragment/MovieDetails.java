@@ -106,7 +106,7 @@ public class MovieDetails extends Fragment {
         title.setText("");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        adapterMovies=new AdapterMovies(this.getActivity(),(movies));
+        adapterMovies=new AdapterMovies(this.getActivity(),movies, 0);
         recyclerView.setAdapter(adapterMovies);
         ArrayList<Video> videos = new ArrayList<>();
         VideoAdapter adapter = new VideoAdapter(videos);
