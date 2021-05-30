@@ -3,6 +3,7 @@ package com.example.androidproject.Fragment;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,15 @@ import java.util.ArrayList;
 public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemClicked {
 
     BottomNavigationView bottomNav;
+
+    final Fragment homeFragment = new HomeFragment();
+    final Fragment searchFragment = new SearchFragment();
+    final Fragment videoFragment = new VideoFragment();
+    final Fragment profilFragment = new ProfilFragment();
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment activeFragment = homeFragment;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +42,12 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
         bottomNav = (BottomNavigationView) findViewById(R.id.bottom_menu);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        fm.beginTransaction().add(R.id.fragment_container, profilFragment, "4").hide(profilFragment).commit();
+        fm.beginTransaction().add(R.id.fragment_container, videoFragment, "3").hide(videoFragment).commit();
+        fm.beginTransaction().add(R.id.fragment_container, searchFragment, "2").hide(searchFragment).commit();
+        fm.beginTransaction().add(R.id.fragment_container,homeFragment, "1").commit();
+
+        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
     private  BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -42,26 +57,27 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
 
                     switch (item.getItemId()) {
                         case R.id.nav_home:
-                            selectedFragment = new HomeFragment();
-                            break;
+                            //selectedFragment = new HomeFragment();
+                            //break;
+                            fm.beginTransaction().hide(activeFragment).show(homeFragment).commit();
+                            activeFragment = homeFragment;
+                            return true;
                         case R.id.nav_search:
-                            try {
-                                selectedFragment = new SearchFragment();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            Log.i("Search","Clique sur le boutton search");
-                            break;
+                            fm.beginTransaction().hide(activeFragment).show(searchFragment).commit();
+                            activeFragment = searchFragment;
+                            return true;
                         case R.id.nav_video:
-                            selectedFragment = new VideoFragment();
-                            break;
+                            fm.beginTransaction().hide(activeFragment).show(videoFragment).commit();
+                            activeFragment = videoFragment;
+                            return true;
                         case R.id.nav_profil:
-                            selectedFragment = new ProfilFragment();
-                            break;
+                            fm.beginTransaction().hide(activeFragment).show(profilFragment).commit();
+                            activeFragment = profilFragment;
+                            return true;
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                    //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
 
-                    return true;
+                    return false;
                 }
             };
 
