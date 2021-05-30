@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.FeaturedViewHolder> {
     ArrayList<Video> videos;
+    Context context;
 
 
     public VideoAdapter(ArrayList<Video> videos){this.videos = videos;}

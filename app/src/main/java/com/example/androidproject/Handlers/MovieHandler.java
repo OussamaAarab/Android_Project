@@ -8,11 +8,16 @@ import android.os.Message;
 
 import androidx.annotation.NonNull;
 
+
 import com.example.androidproject.Fragment.SecondActivity;
+
+import com.example.androidproject.Fragment.VideoFragment;
+
 import com.example.androidproject.Fragment.VideoPlayerActivity;
 import com.example.androidproject.HomeAdapter.AdapterMovies;
 import com.example.androidproject.Fragment.HomeFragment;
 import com.example.androidproject.HomeAdapter.SlideAdapter;
+import com.example.androidproject.HomeAdapter.TrailerAdapter;
 import com.example.beans.Movie;
 
 import java.util.ArrayList;
@@ -100,6 +105,7 @@ public class MovieHandler extends Handler {
             i.putExtra("key",key);
             context.startActivity(i);
         }
+
         if (msg.arg1 == SecondActivity.MSG_START) {
             HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
@@ -111,6 +117,13 @@ public class MovieHandler extends Handler {
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
             AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterMovies");
             adapter.AddData(movies);
+
+        if (msg.arg1 == VideoFragment.MSG_START_TRENDING_TRAILER) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
+            TrailerAdapter adapter = (TrailerAdapter) objMovie.get("AdapterMovies");
+            adapter.setData(movies);
+
         }
     }
 }

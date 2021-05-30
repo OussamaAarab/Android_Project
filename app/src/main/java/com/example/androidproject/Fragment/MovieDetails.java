@@ -2,7 +2,6 @@ package com.example.androidproject.Fragment;
 
 import android.os.Bundle;
 
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,27 +36,24 @@ import java.util.HashMap;
 public class MovieDetails extends Fragment {
     int id;
     View view;
-    TextView title,desc,release,vote_nb,languageSpoken;
-
-    ImageView imageView;
+    TextView title,desc,release,vote_nb,languageSpoken,simlarMovie;
+    ImageView image;
     RatingBar ratingBar;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     Handler handlerMovie = new MovieDetailsHandler();
 
-    RecyclerView recyclerView;
+    RecyclerView recyclerViewSimilar;
     RecyclerView video_recyclerView;
     AdapterMovies adapterMovies;
     ArrayList<Movie> movies=new ArrayList<>();
 
-    RecyclerView recyclerView1;
-    GenreAdapter adapter;
+    RecyclerView recyclerViewGenre;
+    GenreAdapter genreAdapter;
     RecyclerView.LayoutManager manager;
     FragmentManager fragmentManager;
+    public static final int MSG_DETAILS = 1,MSG_SIMILAR=2;
 
 
-    private String mParam1;
-    private String mParam2;
     public MovieDetails() {
 
     }
@@ -71,8 +67,7 @@ public class MovieDetails extends Fragment {
     public static MovieDetails newInstance(String param1, String param2) {
         MovieDetails fragment = new MovieDetails();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -80,10 +75,7 @@ public class MovieDetails extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -91,7 +83,7 @@ public class MovieDetails extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_movie_details, container, false);
         this.view=view;
-        imageView = view.findViewById(R.id.imageView);
+        image=view.findViewById(R.id.imageView2);
         ratingBar=view.findViewById(R.id.movie_rate);
         title =view.findViewById(R.id.mv_dt_title);
         desc=view.findViewById(R.id.mv_dt_desc);
@@ -99,15 +91,23 @@ public class MovieDetails extends Fragment {
         video_recyclerView = view.findViewById(R.id.video_rv);
         vote_nb=view.findViewById(R.id.mv_dt_nb);
         languageSpoken=view.findViewById(R.id.mv_dt_language);
+        simlarMovie=view.findViewById(R.id.mv_dt_sm);
+        recyclerViewSimilar=view.findViewById(R.id.movies_similar);
+        recyclerViewGenre =view.findViewById(R.id.mv_dt_gn);
 
-        recyclerView=view.findViewById(R.id.movies_similar);
-        recyclerView1=view.findViewById(R.id.mv_dt_gn);
         desc.setText("");
         title.setText("");
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+
+        languageSpoken.setText("");
+        release.setText("");
+        vote_nb.setText("");
+
+
+        recyclerViewSimilar.setHasFixedSize(true);
+        recyclerViewSimilar.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         adapterMovies=new AdapterMovies(this.getActivity(),movies, 0);
-        recyclerView.setAdapter(adapterMovies);
+        recyclerViewSimilar.setAdapter(adapterMovies);
+
         ArrayList<Video> videos = new ArrayList<>();
         VideoAdapter adapter = new VideoAdapter(videos);
 
@@ -117,9 +117,9 @@ public class MovieDetails extends Fragment {
         video_recyclerView.setAdapter(adapter);
         Log.d(getClass().getName(),"Recycler view shown : " + video_recyclerView.isShown());
 
-        recyclerView.setHasFixedSize(true);
+        recyclerViewSimilar.setHasFixedSize(true);
         manager=new LinearLayoutManager(view.getContext());
-        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
+        recyclerViewGenre.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
 
         MovieDetails movieDetails=this;
         new Thread(new Runnable() {
@@ -129,16 +129,14 @@ public class MovieDetails extends Fragment {
                 try {
                     factory = API_Factory.getInstance(view.getContext());
                     Message message = new Message();
-                    message.arg1 = 1;
+                    message.arg1 = MSG_DETAILS;
                     API_Movie api_movie = factory.getAPI_Movie();
                     Movie movie = api_movie.findMovie(id, "videos");
                     if(!(movie == null)) {
-
-
                         HashMap<String,Object> objects = new HashMap<>();
                         objects.put("movie",movie);
                         objects.put("movieDetails",movieDetails);
-                        objects.put("adapter",adapterMovies);
+                        objects.put("adapterMovies",adapterMovies);
                         objects.put("video_adapter",adapter);
                         message.obj = objects;
                         handlerMovie.sendMessage(message);
@@ -155,14 +153,15 @@ public class MovieDetails extends Fragment {
                 try {
                     factory = API_Factory.getInstance(view.getContext());
                     Message message = new Message();
-                    message.arg1 = 2;
+                    message.arg1 = MSG_SIMILAR;
                     API_Movie api_movie = factory.getAPI_Movie();
 
                     movies=api_movie.findSimilarMovies(id,"","");
 
                     HashMap<String,Object> objects = new HashMap<>();
+                    objects.put("movieDetails",movieDetails);
                     objects.put("movies",movies);
-                    objects.put("adapter",adapterMovies);
+                    objects.put("adapterMovies",adapterMovies);
                     message.obj = objects;
                     handlerMovie.sendMessage(message);
 
@@ -176,15 +175,7 @@ public class MovieDetails extends Fragment {
     }
 
     public void setData(Movie movie)
-    {/*
-        for(int i=0;i<movie.getGenres().length;i++)
-        {
-            if(i==3) break;
-            genre[i].setText(movie.getGenres()[i].getName());
-            genre[i].setVisibility(View.VISIBLE);
-        }
-
-        */
+    {
 
             ArrayList<Genre> genres=new ArrayList<>();
             for (int i=0;i<movie.getGenres().length;i++)
@@ -200,22 +191,32 @@ public class MovieDetails extends Fragment {
         if(!s.isEmpty())
             s=s.substring(0,s.lastIndexOf(','));
         String linkImage = "";
+
         try {
 
-            linkImage = API_Factory.getInstance(view.getContext()).getImage_source() + "w500" + movie.getBackdrop_path();
+            linkImage = API_Factory.getInstance(view.getContext()).getImage_source() + "w500" + movie.getPoster_path();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Picasso.get().load(linkImage).into(imageView);
+        Picasso.get().load(linkImage).into(image);
+
         ratingBar.setRating(movie.getVote_average()*0.5f);
         title.setText(movie.getTitle());
         vote_nb.setText(""+movie.getVote_count());
         desc.setText(movie.getOverview());
-        adapter=new GenreAdapter(this.getActivity(),genres);
-        recyclerView1.setAdapter(adapter);
+        genreAdapter=new GenreAdapter(this.getActivity(),genres);
+        recyclerViewGenre.setAdapter(genreAdapter);
 
         release.setText(movie.getRelease_date());
         languageSpoken.setText(s);
+
+    }
+
+   public  void similarMovie(Boolean  aBoolean)
+    {         if( aBoolean==false){
+            simlarMovie.setVisibility(View.INVISIBLE);
+            recyclerViewSimilar.setVisibility(View.INVISIBLE);
+             }
 
     }
 }
