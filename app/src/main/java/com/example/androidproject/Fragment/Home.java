@@ -88,14 +88,21 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
     @Override
     public void onItemClicked(int id) {
 
+
         Fragment fragment = new com.example.androidproject.Fragment.MovieDetails(id);
+
+        Fragment f = getSupportFragmentManager().findFragmentByTag("detail");
+
 
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragment_container, fragment, "detail")
                 .hide(activeFragment)
+                .addToBackStack(null)
                 .commit();
         activeFragment = fragment;
+
+        if(f != null) getSupportFragmentManager().beginTransaction().remove(f).commit();
 
     }
 
