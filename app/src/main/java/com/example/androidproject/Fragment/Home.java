@@ -47,7 +47,7 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
         fm.beginTransaction().add(R.id.fragment_container, searchFragment, "2").hide(searchFragment).commit();
         fm.beginTransaction().add(R.id.fragment_container,homeFragment, "1").commit();
 
-        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+
     }
     private  BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -75,7 +75,7 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
                             activeFragment = profilFragment;
                             return true;
                     }
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+
 
                     return false;
                 }

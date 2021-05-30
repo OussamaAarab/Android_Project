@@ -317,6 +317,19 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // Set Focus on ScrollView
+        recyclerTrendingMovies.setFocusable(false);
+        recyclerPopularMovies.setFocusable(false);
+        recyclerHorrorMovies.setFocusable(false);
+        recyclerActionMovies.setFocusable(false);
+        recyclerAdventureMovies.setFocusable(false);
+        recyclerComedyMovies.setFocusable(false);
+        recyclerDramaMovies.setFocusable(false);
+        recyclerRomanceMovies.setFocusable(false);
+        recyclerWarMovies.setFocusable(false);
+        recyclerDocumentaryMovies.setFocusable(false);
+        scrollView.setFocusable(true);
+
 
         return v;
     }
