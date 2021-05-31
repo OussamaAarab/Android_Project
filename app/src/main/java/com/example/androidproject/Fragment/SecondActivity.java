@@ -11,6 +11,7 @@ import android.os.Message;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.androidproject.Handlers.MovieHandler;
 import com.example.androidproject.HomeAdapter.AdapterMovies;
@@ -32,6 +33,8 @@ public class SecondActivity extends AppCompatActivity implements MovieSearchAdap
     AdapterMovies adapterMovies;
 
     ArrayList<Movie> listMovies = new ArrayList<>();
+
+    TextView title;
 
     MovieHandler handlerMovies;
 
@@ -62,6 +65,9 @@ public class SecondActivity extends AppCompatActivity implements MovieSearchAdap
 
         recyclerMovies = (RecyclerView) findViewById(R.id.recycler_more_movies);
 
+        title = (TextView) findViewById(R.id.title_gender);
+
+
         adapterMovies = new AdapterMovies(this, listMovies, 1);
         recyclerCards(recyclerMovies,adapterMovies);
 
@@ -71,6 +77,7 @@ public class SecondActivity extends AppCompatActivity implements MovieSearchAdap
             @Override
             public void run() {
                 try {
+                    title.setText(adapterMovies.LoadTitle(gender));
                     Message message = new Message();
                     listMovies = adapterMovies.LoadCards(gender, 1);
                     message.arg1 = MSG_START;

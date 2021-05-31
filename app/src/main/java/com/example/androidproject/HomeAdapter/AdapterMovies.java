@@ -169,6 +169,33 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
         return null;
     }
 
+    public String LoadTitle(int genre) throws Exception {
+        switch (genre)
+        {
+            case SecondActivity.TRENDING:
+                return "Trending Movies of the week";
+            case SecondActivity.POPULAR:
+                return "Popular Movies";
+            case SecondActivity.HORROR:
+                return "Horror Movies";
+            case SecondActivity.ACTION:
+                return "Action Movies";
+            case SecondActivity.ADVENTURE:
+                return "Adventure Movies";
+            case SecondActivity.COMEDY:
+                return "Comedy Movies";
+            case SecondActivity.DRAMA:
+                return "Drama Movies";
+            case SecondActivity.ROMANCE:
+                return "Romance Movies";
+            case SecondActivity.WAR:
+                return "War Movies";
+            case SecondActivity.DOCUMENTARY:
+                return "Documentary Movies";
+        }
+        return null;
+    }
+
     public void NextPage(int page)
     {
         new Thread(new Runnable() {
