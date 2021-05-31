@@ -15,6 +15,7 @@ import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -45,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView logo;
     TextView slogan,text_bottom;
     Animation logo_anim,slogan_anim;
-    private static int SPLASH_SCREEN = 10500;
+    MediaPlayer sound;
+    private static int SPLASH_SCREEN = 10000;
 
 
     @Override
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
 
         // Animation
         logo_anim = AnimationUtils.loadAnimation(this,R.anim.logo_animation);
@@ -65,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
         logo.setAnimation(logo_anim);
         slogan.setAnimation(slogan_anim);
         text_bottom.setAnimation(slogan_anim);
+
+        // Sound
+        sound = MediaPlayer.create(this, R.raw.audio);
+        sound.start();
 
         new Handler().postDelayed(new Runnable() {
             @Override
