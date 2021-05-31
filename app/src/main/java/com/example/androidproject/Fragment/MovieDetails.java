@@ -51,6 +51,8 @@ public class MovieDetails extends Fragment {
     GenreAdapter genreAdapter;
     RecyclerView.LayoutManager manager;
     FragmentManager fragmentManager;
+    public static final int MSG_DETAILS = 1,MSG_SIMILAR=2;
+
 
     public MovieDetails() {
 
@@ -95,15 +97,17 @@ public class MovieDetails extends Fragment {
 
         desc.setText("");
         title.setText("");
+
         languageSpoken.setText("");
         release.setText("");
-      vote_nb.setText("");
+        vote_nb.setText("");
 
 
         recyclerViewSimilar.setHasFixedSize(true);
         recyclerViewSimilar.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        adapterMovies=new AdapterMovies(this.getActivity(),(movies));
+        adapterMovies=new AdapterMovies(this.getActivity(),movies, 0);
         recyclerViewSimilar.setAdapter(adapterMovies);
+
         ArrayList<Video> videos = new ArrayList<>();
         VideoAdapter adapter = new VideoAdapter(videos);
 
@@ -125,14 +129,14 @@ public class MovieDetails extends Fragment {
                 try {
                     factory = API_Factory.getInstance(view.getContext());
                     Message message = new Message();
-                    message.arg1 = 1;
+                    message.arg1 = MSG_DETAILS;
                     API_Movie api_movie = factory.getAPI_Movie();
                     Movie movie = api_movie.findMovie(id, "videos");
                     if(!(movie == null)) {
                         HashMap<String,Object> objects = new HashMap<>();
                         objects.put("movie",movie);
                         objects.put("movieDetails",movieDetails);
-                        objects.put("adapter",adapterMovies);
+                        objects.put("adapterMovies",adapterMovies);
                         objects.put("video_adapter",adapter);
                         message.obj = objects;
                         handlerMovie.sendMessage(message);
@@ -149,7 +153,7 @@ public class MovieDetails extends Fragment {
                 try {
                     factory = API_Factory.getInstance(view.getContext());
                     Message message = new Message();
-                    message.arg1 = 2;
+                    message.arg1 = MSG_SIMILAR;
                     API_Movie api_movie = factory.getAPI_Movie();
 
                     movies=api_movie.findSimilarMovies(id,"","");
@@ -157,7 +161,7 @@ public class MovieDetails extends Fragment {
                     HashMap<String,Object> objects = new HashMap<>();
                     objects.put("movieDetails",movieDetails);
                     objects.put("movies",movies);
-                    objects.put("adapter",adapterMovies);
+                    objects.put("adapterMovies",adapterMovies);
                     message.obj = objects;
                     handlerMovie.sendMessage(message);
 

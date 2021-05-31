@@ -5,10 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+
+import com.example.androidproject.Fragment.SecondActivity;
+
 import com.example.androidproject.Fragment.VideoFragment;
+
 import com.example.androidproject.Fragment.VideoPlayerActivity;
 import com.example.androidproject.HomeAdapter.AdapterMovies;
 import com.example.androidproject.Fragment.HomeFragment;
@@ -95,17 +100,34 @@ public class MovieHandler extends Handler {
             // TODO : Traitement du chargement
 
         }
-        if(msg.arg1 == SlideAdapter.MSG_SLIDE_CLICK){
+        if (msg.arg1 == SlideAdapter.MSG_SLIDE_CLICK) {
             String key = (String) msg.obj;
             Intent i = new Intent(context, VideoPlayerActivity.class);
+
+            Log.d(getClass().getName(),"Youtube Video key : "+key);
             i.putExtra("key",key);
+
             context.startActivity(i);
+        }
+
+        if (msg.arg1 == SecondActivity.MSG_START) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
+            AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterMovies");
+            adapter.SetData(movies);
+        }
+        if (msg.arg1 == AdapterMovies.MSG_PAGE) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
+            AdapterMovies adapter = (AdapterMovies) objMovie.get("AdapterMovies");
+            adapter.AddData(movies);
         }
         if (msg.arg1 == VideoFragment.MSG_START_TRENDING_TRAILER) {
             HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
             TrailerAdapter adapter = (TrailerAdapter) objMovie.get("AdapterMovies");
             adapter.setData(movies);
+
         }
         
     }

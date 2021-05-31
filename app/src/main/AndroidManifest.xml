@@ -12,12 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Fragment.SecondActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
             android:name=".Fragment.VideoPlayerActivity"
             android:screenOrientation="landscape" />
         <activity
             android:name=".Fragment.Home"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/> <!-- Theme.AndroidProject -->
+            android:screenOrientation="portrait" /> <!-- Theme.AndroidProject -->
         <activity android:name=".Fragment.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

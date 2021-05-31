@@ -7,12 +7,18 @@
     tools:context=".Fragment.Home"
     android:background="@drawable/gradient_background">
 
+    <ImageView
+        android:id="@+id/trailer_image"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/trailer"
+        android:scaleType="centerCrop"/>
 
     <ScrollView
         android:id="@+id/scrollView_Home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
+        android:layout_below="@id/trailer_image"
         >
 
 
@@ -40,8 +46,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
-                    android:layout_marginBottom="5dp"
                     >
 
                     <TextView
@@ -69,8 +73,113 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_popular_movies_week_trailers"
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="230dp"
                     android:paddingBottom="0dp" />
+=======
+                    android:layout_height="200dp"
+                    android:paddingBottom="5dp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                >
+
+
+                <RelativeLayout
+                    android:id="@+id/layout_latest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/title_latest"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/latest_movies"
+                        android:textColor="@color/black"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_more"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:textSize="10sp"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/latest_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:paddingBottom="5dp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp"
+                >
+
+
+                <RelativeLayout
+                    android:id="@+id/layout_upcoming"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/title_upcoming"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/upcoming_movies"
+                        android:textColor="@color/black"
+                        android:textSize="21sp"
+                        android:textStyle="bold"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_more"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:textSize="10sp"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/upcoming_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:paddingBottom="5dp" />
+>>>>>>> 0ebc4fb34fc06bed9ca33b8fdf799dff5df7cea7
 
 
             </LinearLayout>
