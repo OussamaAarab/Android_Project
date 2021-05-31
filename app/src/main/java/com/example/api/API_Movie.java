@@ -32,6 +32,8 @@ public class API_Movie {
     private static final String Popular_Movies = "https://api.themoviedb.org/3/movie/popular";
     private static final String  Movie_Details = "https://api.themoviedb.org/3/movie/";
     private static final String  Latest_Movies = "https://api.themoviedb.org/3/movie/latest";
+    private static final String  TopRated_Movies = "https://api.themoviedb.org/3/movie/top_rated";
+    private static final String  UpComing_Movies = "https://api.themoviedb.org/3/movie/upcoming";
     private static final String  Genre_Movies = "https://api.themoviedb.org/3/discover/movie";
     //https://api.themoviedb.org/3/discover/movie?api_key=cdd42548fd8b23411054cc617a1211de&with_genres=27
 
@@ -228,12 +230,16 @@ public class API_Movie {
         return movie;
     }
 
-    public ArrayList<Movie> findLatestMovies(String time_window) throws IOException {
+
+    @Deprecated
+    public ArrayList<Movie> findLatestMovies() throws IOException {
         ArrayList<Movie> movies = new ArrayList<>();
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder builder = HttpUrl.parse(Latest_Movies).newBuilder();
         builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        builder.addQueryParameter("lang",API_Factory.getLang());
         String url = builder.build().toString();
+        Log.d(getClass().getName(),url);
 
         Request request = new Request.Builder().url(url).build();
 
@@ -241,6 +247,7 @@ public class API_Movie {
         String resp =response.body().string();
         System.out.println(resp);
         resp = resp.trim();
+        Log.d(getClass().getName(),resp);
         Gson gson = new Gson();
         JsonObject entity = gson.fromJson(resp, JsonObject.class);
 
@@ -365,6 +372,64 @@ public class API_Movie {
         }
         return "";
 
+
+    }
+
+    public ArrayList<Movie> findTopRatedMovies(int page) throws IOException {
+        ArrayList<Movie> movies = new ArrayList<>();
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(TopRated_Movies).newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        builder.addQueryParameter("lang",API_Factory.getLang());
+        builder.addQueryParameter("lpage",""+page);
+        String url = builder.build().toString();
+        Log.d(getClass().getName(),url);
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Log.d(getClass().getName(),resp);
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+
+        JsonArray array = entity.getAsJsonArray("results");
+        for(JsonElement o : array ){
+            Movie m = new Movie(o.getAsJsonObject());
+            movies.add(m);
+        }
+        return movies;
+
+    }
+
+    public ArrayList<Movie> findUpcomingMovies(int page) throws IOException {
+        ArrayList<Movie> movies = new ArrayList<>();
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder builder = HttpUrl.parse(UpComing_Movies).newBuilder();
+        builder.addQueryParameter("api_key",factory.getAPI_KEY());
+        builder.addQueryParameter("lang",API_Factory.getLang());
+        builder.addQueryParameter("lpage",""+page);
+        String url = builder.build().toString();
+        Log.d(getClass().getName(),url);
+
+        Request request = new Request.Builder().url(url).build();
+
+        Response response = client.newCall(request).execute();
+        String resp =response.body().string();
+        System.out.println(resp);
+        resp = resp.trim();
+        Log.d(getClass().getName(),resp);
+        Gson gson = new Gson();
+        JsonObject entity = gson.fromJson(resp, JsonObject.class);
+
+        JsonArray array = entity.getAsJsonArray("results");
+        for(JsonElement o : array ){
+            Movie m = new Movie(o.getAsJsonObject());
+            movies.add(m);
+        }
+        return movies;
 
     }
 

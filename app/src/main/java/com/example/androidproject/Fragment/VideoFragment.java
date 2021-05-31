@@ -32,9 +32,15 @@ public class VideoFragment extends Fragment {
     public static final int MSG_START_TRENDING_TRAILER = 13;
 
     RecyclerView week_trending_rv;
+    RecyclerView latestRv;
+    RecyclerView upcomingRv;
     TrailerAdapter week_trending_adapter;
+    TrailerAdapter latestAdapter;
+    TrailerAdapter upcomingAdapter;
     MovieHandler handler = new MovieHandler();
-    ArrayList trending_Movies_w = new ArrayList();
+    ArrayList<Movie> trending_Movies_w = new ArrayList();
+    ArrayList<Movie> latest_Movies = new ArrayList();
+    ArrayList<Movie> upcoming_Movies = new ArrayList();
     View v;
 
     @Nullable
@@ -43,9 +49,12 @@ public class VideoFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_video, container, false);
 
         week_trending_rv = v.findViewById(R.id.recycler_popular_movies_week_trailers);
+        latestRv = v.findViewById(R.id.latest_rv);
+        upcomingRv = v.findViewById(R.id.upcoming_rv);
+        latestAdapter = recyclerCards(latestRv,latest_Movies);
         this.week_trending_adapter = recyclerCards(week_trending_rv,trending_Movies_w);
+        upcomingAdapter =  recyclerCards(upcomingRv,upcoming_Movies);
         LoadData();
-
         return v;
     }
 
@@ -71,6 +80,50 @@ public class VideoFragment extends Fragment {
                     HashMap<String,Object> objects = new HashMap<>();
                     objects.put("MoviesList",trending_Movies_w);
                     objects.put("AdapterMovies",VideoFragment.this.week_trending_adapter);
+                    message.obj = objects;
+                    handler.sendMessage(message);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    Message message = new Message();
+                    API_Factory factory = API_Factory.getInstance(v.getContext());
+                    API_Movie movie = factory.getAPI_Movie();
+                    latest_Movies = movie.findTopRatedMovies(1);
+                    message.arg1 = MSG_START_TRENDING_TRAILER;
+                    HashMap<String,Object> objects = new HashMap<>();
+                    objects.put("MoviesList",latest_Movies);
+                    objects.put("AdapterMovies",VideoFragment.this.latestAdapter);
+                    message.obj = objects;
+                    handler.sendMessage(message);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    Message message = new Message();
+                    API_Factory factory = API_Factory.getInstance(v.getContext());
+                    API_Movie movie = factory.getAPI_Movie();
+                    upcoming_Movies = movie.findUpcomingMovies(1);
+                    message.arg1 = MSG_START_TRENDING_TRAILER;
+                    HashMap<String,Object> objects = new HashMap<>();
+                    objects.put("MoviesList",upcoming_Movies);
+                    objects.put("AdapterMovies",upcomingAdapter);
                     message.obj = objects;
                     handler.sendMessage(message);
 

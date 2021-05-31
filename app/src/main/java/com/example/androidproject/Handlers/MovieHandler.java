@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -98,7 +99,9 @@ public class MovieHandler extends Handler {
         if(msg.arg1 == SlideAdapter.MSG_SLIDE_CLICK){
             String key = (String) msg.obj;
             Intent i = new Intent(context, VideoPlayerActivity.class);
+            Log.d(getClass().getName(),"Youtube Video key : "+key);
             i.putExtra("key",key);
+
             context.startActivity(i);
         }
         if (msg.arg1 == VideoFragment.MSG_START_TRENDING_TRAILER) {
