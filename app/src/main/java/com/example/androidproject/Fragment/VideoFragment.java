@@ -29,17 +29,52 @@ import java.util.HashMap;
 
 public class VideoFragment extends Fragment {
 
+    public static final int MSG_LOAD = -1;
+    public static final int MSG_START = 1;
+    public static final int MSG_SLIDE = 2;
+    public static final int MSG_POPULAR = 3;
+    public static final int MSG_HORROR = 5;
+    public static final int MSG_ACTION = 6;
+    public static final int MSG_ADVENTURE = 7;
+    public static final int MSG_COMEDY = 8;
+    public static final int MSG_DRAMA = 9;
+    public static final int MSG_ROMANCE = 10;
+    public static final int MSG_WAR = 11;
+    public static final int MSG_DOCUMENTARY = 12;
+
     public static final int MSG_START_TRENDING_TRAILER = 13;
 
     RecyclerView week_trending_rv;
+    RecyclerView recyclerPopularMovies;
+
+
     TrailerAdapter week_trending_adapter;
+    TrailerAdapter adapterPopularMovies;
+
+    MovieHandler handlerPopularMovies;
+
     MovieHandler handler = new MovieHandler();
     ArrayList trending_Movies_w = new ArrayList();
+    ArrayList popular_Movies = new ArrayList();
+
     View v;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        recyclerPopularMovies = v.findViewById(R.id.recycler_popular_series);
+
+        this.adapterPopularMovies = recyclerCards(recyclerPopularMovies,popular_Movies);
+
+        handlerPopularMovies = new MovieHandler();
+
+
+
+
+
+
+
         v = inflater.inflate(R.layout.fragment_video, container, false);
 
         week_trending_rv = v.findViewById(R.id.recycler_popular_movies_week_trailers);

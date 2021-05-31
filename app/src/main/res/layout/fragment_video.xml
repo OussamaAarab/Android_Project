@@ -69,18 +69,71 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_popular_movies_week_trailers"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:paddingBottom="5dp" />
+                    android:layout_height="230dp"
+                    android:paddingBottom="0dp" />
 
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/greyLight"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:orientation="vertical"
+                >
+
+
+                <RelativeLayout
+                    android:id="@+id/layout_title_series"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginBottom="5dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/title_popular_series"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="21sp"
+                        android:text="@string/popular_movies"
+                        android:textColor="@color/black"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_more"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:textSize="10sp"
+                        android:textColor="@color/black"/>
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_popular_movies"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:paddingBottom="5dp"
+                    />
+
+            </LinearLayout>
+
         </LinearLayout>
-
-
-
-
-
-
 
     </ScrollView>
 

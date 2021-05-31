@@ -107,5 +107,6 @@ public class MovieHandler extends Handler {
             TrailerAdapter adapter = (TrailerAdapter) objMovie.get("AdapterMovies");
             adapter.setData(movies);
         }
+        
     }
 }
