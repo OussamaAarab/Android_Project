@@ -197,7 +197,7 @@ public class HomeFragment extends Fragment {
                     message.arg1 = MSG_LOAD;
                     API_Factory factory = API_Factory.getInstance(v.getContext());
                     API_Movie movie = factory.getAPI_Movie();
-                    popular_Movies = movie.findPopularMovies();
+                    popular_Movies = movie.findPopularMovies(1);
                     message = new Message();
                     message.arg1 = MSG_START;
                     HashMap<String,Object> objects = new HashMap<>();
@@ -221,7 +221,7 @@ public class HomeFragment extends Fragment {
                     message.arg1 = MSG_LOAD;
                     API_Factory factory = API_Factory.getInstance(v.getContext());
                     API_Movie movie = factory.getAPI_Movie();
-                    horror_Movies = movie.findGenreMovies(27);
+                    horror_Movies = movie.findGenreMovies(27, 1);
                     message = new Message();
                     message.arg1 = MSG_HORROR;
                     HashMap<String,Object> objects = new HashMap<>();
@@ -232,7 +232,7 @@ public class HomeFragment extends Fragment {
 
                     // Action Movie
                     message = new Message();
-                    action_Movies = movie.findGenreMovies(28);
+                    action_Movies = movie.findGenreMovies(28, 1);
                     message = new Message();
                     message.arg1 = MSG_ACTION;
                     objects = new HashMap<>();
@@ -243,7 +243,7 @@ public class HomeFragment extends Fragment {
 
                     // Adventure Movie
                     message = new Message();
-                    adventure_Movies = movie.findGenreMovies(12);
+                    adventure_Movies = movie.findGenreMovies(12, 1);
                     message = new Message();
                     message.arg1 = MSG_ADVENTURE;
                     objects = new HashMap<>();
@@ -254,7 +254,7 @@ public class HomeFragment extends Fragment {
 
                     // Comedy Movie
                     message = new Message();
-                    comedy_Movies = movie.findGenreMovies(35);
+                    comedy_Movies = movie.findGenreMovies(35, 1);
                     message = new Message();
                     message.arg1 = MSG_COMEDY;
                     objects = new HashMap<>();
@@ -265,7 +265,7 @@ public class HomeFragment extends Fragment {
 
                     // Drama Movie
                     message = new Message();
-                    drama_Movies = movie.findGenreMovies(18);
+                    drama_Movies = movie.findGenreMovies(18, 1);
                     message = new Message();
                     message.arg1 = MSG_DRAMA;
                     objects = new HashMap<>();
@@ -276,7 +276,7 @@ public class HomeFragment extends Fragment {
 
                     // Romance Movie
                     message = new Message();
-                    romance_Movies = movie.findGenreMovies(10749);
+                    romance_Movies = movie.findGenreMovies(10749, 1);
                     message = new Message();
                     message.arg1 = MSG_ROMANCE;
                     objects = new HashMap<>();
@@ -287,7 +287,7 @@ public class HomeFragment extends Fragment {
 
                     // War Movie
                     message = new Message();
-                    war_Movies = movie.findGenreMovies(10752);
+                    war_Movies = movie.findGenreMovies(10752, 1);
                     message = new Message();
                     message.arg1 = MSG_WAR;
                     objects = new HashMap<>();
@@ -298,7 +298,7 @@ public class HomeFragment extends Fragment {
 
                     // Documentary Movie
                     message = new Message();
-                    documentary_Movies = movie.findGenreMovies(99);
+                    documentary_Movies = movie.findGenreMovies(99, 1);
                     message = new Message();
                     message.arg1 = MSG_DOCUMENTARY;
                     objects = new HashMap<>();
@@ -329,6 +329,14 @@ public class HomeFragment extends Fragment {
 
         moreTrendingMovies.setText(content);
         morePopularMovies.setText(content);
+        moreHorrorMovies.setText(content);
+        moreActionMovies.setText(content);
+        moreAdventureMovies.setText(content);
+        moreComedyMovies.setText(content);
+        moreDramaMovies.setText(content);
+        moreRomanceMovies.setText(content);
+        moreWarMovies.setText(content);
+        moreDocumentaryMovies.setText(content);
 
         moreTrendingMovies.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -343,6 +351,70 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent activity = new Intent(getActivity(),SecondActivity.class);
                 activity.putExtra("gender", SecondActivity.POPULAR);
+                startActivity(activity);
+            }
+        });
+        moreHorrorMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getActivity(),SecondActivity.class);
+                activity.putExtra("gender", SecondActivity.HORROR);
+                startActivity(activity);
+            }
+        });
+        moreActionMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getActivity(),SecondActivity.class);
+                activity.putExtra("gender", SecondActivity.ACTION);
+                startActivity(activity);
+            }
+        });
+        moreAdventureMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getActivity(),SecondActivity.class);
+                activity.putExtra("gender", SecondActivity.ADVENTURE);
+                startActivity(activity);
+            }
+        });
+        moreComedyMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getActivity(),SecondActivity.class);
+                activity.putExtra("gender", SecondActivity.COMEDY);
+                startActivity(activity);
+            }
+        });
+        moreDramaMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getActivity(),SecondActivity.class);
+                activity.putExtra("gender", SecondActivity.DRAMA);
+                startActivity(activity);
+            }
+        });
+        moreRomanceMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getActivity(),SecondActivity.class);
+                activity.putExtra("gender", SecondActivity.ROMANCE);
+                startActivity(activity);
+            }
+        });
+        moreWarMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getActivity(),SecondActivity.class);
+                activity.putExtra("gender", SecondActivity.WAR);
+                startActivity(activity);
+            }
+        });
+        moreDocumentaryMovies.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = new Intent(getActivity(),SecondActivity.class);
+                activity.putExtra("gender", SecondActivity.DOCUMENTARY);
                 startActivity(activity);
             }
         });

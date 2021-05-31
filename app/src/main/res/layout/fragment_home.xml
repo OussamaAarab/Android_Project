@@ -217,7 +217,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
                     android:layout_marginBottom="5dp"
                     >
 
@@ -229,7 +228,7 @@
                         android:textSize="21sp"
                         android:text="@string/horror_movies"
                         android:textColor="@color/black"
-
+                        android:layout_marginBottom="10dp"
                         />
 
                     <TextView
@@ -276,7 +275,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
                     android:layout_marginBottom="5dp"
                     >
 
@@ -288,7 +286,7 @@
                         android:textSize="21sp"
                         android:text="@string/action_movies"
                         android:textColor="@color/black"
-
+                        android:layout_marginBottom="10dp"
                         />
 
                     <TextView
@@ -335,7 +333,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
                     android:layout_marginBottom="5dp"
                     >
 
@@ -347,7 +344,7 @@
                         android:textSize="21sp"
                         android:text="@string/adventure_movies"
                         android:textColor="@color/black"
-
+                        android:layout_marginBottom="10dp"
                         />
 
                     <TextView
@@ -394,7 +391,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
                     android:layout_marginBottom="5dp"
                     >
 
@@ -406,7 +402,7 @@
                         android:textSize="21sp"
                         android:text="@string/comedy_movies"
                         android:textColor="@color/black"
-
+                        android:layout_marginBottom="10dp"
                         />
 
                     <TextView
@@ -453,7 +449,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
                     android:layout_marginBottom="5dp"
                     >
 
@@ -465,7 +460,7 @@
                         android:textSize="21sp"
                         android:text="@string/drama_movies"
                         android:textColor="@color/black"
-
+                        android:layout_marginBottom="10dp"
                         />
 
                     <TextView
@@ -512,7 +507,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
                     android:layout_marginBottom="5dp"
                     >
 
@@ -524,7 +518,7 @@
                         android:textSize="21sp"
                         android:text="@string/romance_movies"
                         android:textColor="@color/black"
-
+                        android:layout_marginBottom="10dp"
                         />
 
                     <TextView
@@ -571,7 +565,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
                     android:layout_marginBottom="5dp"
                     >
 
@@ -583,7 +576,7 @@
                         android:textSize="21sp"
                         android:text="@string/war_movies"
                         android:textColor="@color/black"
-
+                        android:layout_marginBottom="10dp"
                         />
 
                     <TextView
@@ -630,7 +623,6 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
                     android:layout_marginBottom="5dp"
                     >
 
@@ -642,7 +634,7 @@
                         android:textSize="21sp"
                         android:text="@string/documentary_movies"
                         android:textColor="@color/black"
-
+                        android:layout_marginBottom="10dp"
                         />
 
                     <TextView
