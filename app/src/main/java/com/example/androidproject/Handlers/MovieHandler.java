@@ -130,6 +130,7 @@ public class MovieHandler extends Handler {
             adapter.setData(movies);
 
         }
+
         
     }
 }
