@@ -78,7 +78,7 @@ public class SearchFragment extends Fragment {
                     Message message = new Message();
                     message.arg1 = MSG_POPULAR;
                     API_Movie api_movie = factory.getAPI_Movie();
-                    movies=api_movie.findPopularMovies();
+                    movies=api_movie.findPopularMovies(1);
                     HashMap<String,Object> objects = new HashMap<>();
                     objects.put("movies",movies);
                     objects.put("adapterPopular",adapterSearch);

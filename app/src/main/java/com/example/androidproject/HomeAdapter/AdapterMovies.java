@@ -139,7 +139,31 @@ public class AdapterMovies extends RecyclerView.Adapter<AdapterMovies.FeaturedVi
                 list = movie.findTrendingMovies("week", page);
                 return list;
             case SecondActivity.POPULAR:
-                list = movie.findPopularMovies();
+                list = movie.findPopularMovies(page);
+                return list;
+            case SecondActivity.HORROR:
+                list = movie.findGenreMovies(27, page);
+                return list;
+            case SecondActivity.ACTION:
+                list = movie.findGenreMovies(28, page);
+                return list;
+            case SecondActivity.ADVENTURE:
+                list = movie.findGenreMovies(12, page);
+                return list;
+            case SecondActivity.COMEDY:
+                list = movie.findGenreMovies(35, page);
+                return list;
+            case SecondActivity.DRAMA:
+                list = movie.findGenreMovies(18, page);
+                return list;
+            case SecondActivity.ROMANCE:
+                list = movie.findGenreMovies(10749, page);
+                return list;
+            case SecondActivity.WAR:
+                list = movie.findGenreMovies(10752, page);
+                return list;
+            case SecondActivity.DOCUMENTARY:
+                list = movie.findGenreMovies(99, page);
                 return list;
         }
         return null;

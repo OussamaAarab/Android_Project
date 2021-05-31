@@ -105,12 +105,12 @@ public class API_Movie {
 
     }
 
-    public ArrayList<Movie> findPopularMovies() throws IOException {
+    public ArrayList<Movie> findPopularMovies(int page) throws IOException {
         ArrayList<Movie> movies = new ArrayList<>();
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder builder = HttpUrl.parse(Popular_Movies).newBuilder();
         builder.addQueryParameter("api_key",factory.getAPI_KEY());
-        //builder.addQueryParameter("page",page+"");
+        builder.addQueryParameter("page",page+"");
         builder.addQueryParameter("language",API_Factory.getLang());
         String url = builder.build().toString();
         Log.d(this.getClass().getName(),url);
@@ -133,12 +133,12 @@ public class API_Movie {
 
     }
 
-    public ArrayList<Movie> findGenreMovies(int id) throws IOException {
+    public ArrayList<Movie> findGenreMovies(int id, int page) throws IOException {
         ArrayList<Movie> movies = new ArrayList<>();
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder builder = HttpUrl.parse(Genre_Movies).newBuilder();
         builder.addQueryParameter("api_key",factory.getAPI_KEY());
-        //builder.addQueryParameter("page",page+"");
+        builder.addQueryParameter("page",page+"");
         builder.addQueryParameter("with_genres",id+"");
         String url = builder.build().toString();
         Log.d(this.getClass().getName(),url);

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.example.androidproject.Handlers.MovieHandler;
@@ -38,12 +39,21 @@ public class SecondActivity extends AppCompatActivity implements MovieSearchAdap
 
     public static final int TRENDING = 1;
     public static final int POPULAR = 2;
+    public static final int HORROR = 3;
+    public static final int ACTION = 4;
+    public static final int ADVENTURE = 5;
+    public static final int COMEDY = 6;
+    public static final int DRAMA = 7;
+    public static final int ROMANCE = 8;
+    public static final int WAR = 9;
+    public static final int DOCUMENTARY = 10;
 
     public static int gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_second);
 
         gender = getIntent().getExtras().getInt("gender");
