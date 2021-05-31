@@ -37,11 +37,24 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.androidproject", appContext.getPackageName());
+        //API_Movie api_movie = API_Factory.getInstance(appContext).getAPI_Movie();
+        //Movie m = api_movie.findMovie(238,null);
 
-        Movie m = API_Factory.getInstance(appContext).getAPI_Movie().findMovie(460465,"videos");
-        assertNotEquals(m.getVideos().size(),0);
 
+        Thread.sleep(500);
+
+        DaoMovie daoMovie = new DaoMovie(appContext);
+        //daoMovie.add_to_visited(m);
+        ArrayList<Movie> movies =  daoMovie.findVisited();
+
+        Log.d(getClass().getName(),"List size : "+movies.size());
+
+        for (Movie mo:movies){
+            Log.d(getClass().getName(),"Movie : id-> "+mo.getId() + " Name-> " + mo.getTitle());
+        }
+
+        assertNotNull(movies);
+        assertNotEquals(movies.size(),0);
 
 
 

@@ -72,7 +72,7 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
                             fm.beginTransaction().hide(activeFragment).show(videoFragment).commit();
                             activeFragment = videoFragment;
                             return true;
-                        case R.id.nav_profil:
+                        case R.id.nav_recently:
                             fm.beginTransaction().hide(activeFragment).show(profilFragment).commit();
                             activeFragment = profilFragment;
                             return true;
