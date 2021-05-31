@@ -1,12 +1,15 @@
 package com.example.beans;
 
+import android.util.Log;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-public class Movie {
+public class Movie implements Comparable<Movie> {
     private JsonObject obj;
     private boolean adult;
     private String backdrop_path;
@@ -33,6 +36,7 @@ public class Movie {
     private float vote_average;
     private int vote_count;
     private ArrayList<Video> videos;
+    private Date visiteDate;
 
 
 
@@ -360,5 +364,21 @@ public class Movie {
 
     public ArrayList<Video> getVideos() {
         return videos;
+    }
+
+    public Date getVisiteDate() {
+        return visiteDate;
+    }
+
+    public void setVisiteDate(Date visiteDate) {
+        this.visiteDate = visiteDate;
+    }
+
+
+    @Override
+    public int compareTo(Movie o) {
+        Log.d(getClass().getName(),"Comparing result " +this.getVisiteDate().compareTo(o.getVisiteDate())+" Date1 : " +this.getVisiteDate() + " Date 2 : " + o.getVisiteDate());
+
+        return this.getVisiteDate().compareTo(o.getVisiteDate());
     }
 }

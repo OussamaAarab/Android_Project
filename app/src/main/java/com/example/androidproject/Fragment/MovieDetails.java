@@ -6,6 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import android.os.Handler;
 import android.os.Message;
@@ -27,6 +33,8 @@ import com.example.api.API_Movie;
 import com.example.beans.Genre;
 import com.example.beans.Movie;
 import com.example.beans.Video;
+import com.example.workers.LastVisitedWorker;
+import com.example.workers.TrendingWorker;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -210,6 +218,8 @@ public class MovieDetails extends Fragment {
         release.setText(movie.getRelease_date());
         languageSpoken.setText(s);
 
+        insertMovie(movie.getId());
+
     }
 
    public  void similarMovie(Boolean  aBoolean)
@@ -218,5 +228,17 @@ public class MovieDetails extends Fragment {
             recyclerViewSimilar.setVisibility(View.INVISIBLE);
              }
 
+    }
+    private void insertMovie(int id){
+        WorkManager manager = WorkManager.getInstance(getActivity());
+            Constraints c = new Constraints.Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build();
+            OneTimeWorkRequest OTworkRequest = new OneTimeWorkRequest.Builder(LastVisitedWorker.class)
+                    .addTag(LastVisitedWorker.LastVisitedWorkerTag)
+                    .setConstraints(c)
+                    .setInputData(new Data.Builder().putInt("id",id).build())
+                    .build();
+        manager.enqueueUniqueWork(LastVisitedWorker.LastVisitedWorkerTag+".unique", ExistingWorkPolicy.KEEP,OTworkRequest);
     }
 }
