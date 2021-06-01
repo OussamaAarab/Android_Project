@@ -136,7 +136,12 @@ public class MovieHandler extends Handler {
             HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
             MovieSearchAdapter adapter = (MovieSearchAdapter) objMovie.get("AdapterMovies");
+            ProfilFragment fragment = (ProfilFragment) objMovie.get("fragment");
             adapter.SetData(movies);
+            if(movies.size()>0){
+                fragment.hideMessage();
+            }
+            else fragment.showMessage();
 
         }
 

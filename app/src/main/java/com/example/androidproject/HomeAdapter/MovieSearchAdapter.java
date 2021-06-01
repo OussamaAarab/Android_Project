@@ -29,6 +29,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
     private String lang = "fr";//Todo change language to users's preferences
     Context context;
     ItemClicked movieClicked;
+    int adapter_type;
 
     public interface ItemClicked
     {
@@ -41,10 +42,11 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
 
     }
 
-    public MovieSearchAdapter(@NonNull Context context, ArrayList<Movie> list) {
+    public MovieSearchAdapter(@NonNull Context context, ArrayList<Movie> list,int adapter_type) {
         movies=list;
         this.context=context;
         movieClicked=(ItemClicked)context;
+        this.adapter_type = adapter_type;
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imMovie;
@@ -100,7 +102,7 @@ public class MovieSearchAdapter extends RecyclerView.Adapter<MovieSearchAdapter.
         }
         Picasso.get().load(linkImage).into(holder.imMovie);
         holder.title.setText(movie.getTitle());
-        if(position >= movies.size() -3){
+        if((position >= movies.size() -3) && (adapter_type ==0)){
 
             LoadNextPage();
 

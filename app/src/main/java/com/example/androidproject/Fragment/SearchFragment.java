@@ -62,7 +62,7 @@ public class SearchFragment extends Fragment {
         recyclerViewSearch.setHasFixedSize(true);
         managerSearch =new LinearLayoutManager(view.getContext());
         recyclerViewSearch.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
-        adapterSearch =new MovieSearchAdapter(this.getActivity(),movies);
+        adapterSearch =new MovieSearchAdapter(this.getActivity(),movies,0);
         recyclerViewSearch.setAdapter(adapterSearch);
 
 
