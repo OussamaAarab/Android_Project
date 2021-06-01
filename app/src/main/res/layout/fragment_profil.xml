@@ -21,17 +21,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="5dp"
-                android:fontFamily="@font/aclonica"
-                android:text="Last Visited"
-                android:textColor="@color/black"
-                android:textSize="21sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/trailer_image"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/last_visited"
+                android:scaleType="fitXY"
+                android:layout_marginBottom="10dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_last_visited"
