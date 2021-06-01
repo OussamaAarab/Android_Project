@@ -76,6 +76,7 @@
                     android:numStars="5"
                     android:progressTint="@color/gold"
                     android:rating="3"
+                    android:layout_marginTop="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/line1" />
 
@@ -84,6 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:layout_marginStart="300dp"
+                    android:layout_marginTop="5dp"
                     android:autoSizeTextType="uniform"
                     android:maxLines="1"
                     android:text="000000"
@@ -103,7 +105,8 @@
                     android:layout_marginEnd="15dp"
                     android:autoSizeTextType="uniform"
                     android:text="title"
-                    android:textColor="@color/gold"
+                    android:textColor="@color/gris"
+                    android:fontFamily="@font/aclonica"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
