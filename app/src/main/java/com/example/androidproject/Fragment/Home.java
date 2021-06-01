@@ -106,11 +106,20 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
 
         super.onBackPressed();
         Fragment f = getSupportFragmentManager().findFragmentByTag("detail");
-        if(f == null) activeFragment = homeFragment;
+        if(f == null) activeFragment = getActiveFragment();
 
         else activeFragment = f;
 
 
+    }
+    private Fragment getActiveFragment(){
+        Fragment f =null;
+        String[] tags =  new String[]{"1","2","3","4","detail"};
+        for(String tag : tags){
+            f = getSupportFragmentManager().findFragmentByTag(tag);
+            if(f != null && f.isVisible()) return f;
+        }
+        return f;
     }
 }
 
