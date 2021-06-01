@@ -54,9 +54,6 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
-
-
-
                     switch (item.getItemId()) {
                         case R.id.nav_home:
                             //selectedFragment = new HomeFragment();
@@ -91,7 +88,6 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
 
         Fragment fragment = new com.example.androidproject.Fragment.MovieDetails(id);
 
-        Fragment f = getSupportFragmentManager().findFragmentByTag("detail");
 
 
         getSupportFragmentManager()
@@ -102,14 +98,17 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
                 .commit();
         activeFragment = fragment;
 
-        if(f != null) getSupportFragmentManager().beginTransaction().remove(f).commit();
 
     }
 
     @Override
     public void onBackPressed() {
-        activeFragment = homeFragment;
+
         super.onBackPressed();
+        Fragment f = getSupportFragmentManager().findFragmentByTag("detail");
+        if(f == null) activeFragment = homeFragment;
+
+        else activeFragment = f;
 
 
     }

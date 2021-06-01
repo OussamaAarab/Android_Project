@@ -50,6 +50,12 @@ public class SlideAdapter extends PagerAdapter{
                 onItemClicked(position);
             }
         });
+        slideLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClicked(position);
+            }
+        });
 
 
         //slideImg.setImageResource(list_Slide.get(position).getImage());
