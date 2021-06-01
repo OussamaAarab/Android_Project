@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 public class DaoFactory {
-    public static final int DB_VERSION = 7;
+    public static final int DB_VERSION = 8;
     protected final static String DB_NAME = "Tickets_Local_Db";
 
     protected SQLiteDatabase db = null;

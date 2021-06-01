@@ -44,51 +44,12 @@
                 >
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="35dp"
-                    android:layout_marginEnd="36dp"
-                    android:layout_marginBottom="449dp"
-                    android:fontFamily="@font/aclonica"
+                    android:layout_centerInParent="true"
                     android:text="@string/oops_no_previous_item_found"
-                    android:textColor="@color/black"
-                    android:textSize="21sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.269" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginBottom="313dp"
-                    android:fontFamily="@font/aclonica"
-                    android:text="@string/start_browsing_and_leave_this_on_us"
-                    android:textColor="@color/black"
-                    android:textSize="21sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView"
-                    app:layout_constraintVertical_bias="0.303" />
+                    android:textSize="30dp" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
