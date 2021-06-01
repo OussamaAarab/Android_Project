@@ -16,6 +16,7 @@ import com.example.androidproject.Handlers.MovieHandler;
 import com.example.androidproject.R;
 import com.example.api.API_Factory;
 import com.example.beans.Movie;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class SlideAdapter extends PagerAdapter{
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View slideLayout = inflater.inflate(R.layout.slide_item, null);
 
+        FloatingActionButton floatingActionButton = slideLayout.findViewById(R.id.floatingActionButton);
 
         ImageView slideImg = slideLayout.findViewById(R.id.slide_img);
         TextView slideText = slideLayout.findViewById(R.id.title_slide);
@@ -51,6 +53,12 @@ public class SlideAdapter extends PagerAdapter{
             }
         });
         slideLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClicked(position);
+            }
+        });
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onItemClicked(position);
