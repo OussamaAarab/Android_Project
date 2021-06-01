@@ -24,4 +24,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="latest_movies">Top Rated Movies</string>
     <string name="upcoming_movies">Upcoming Movies</string>
+    <string name="oops_no_previous_item_found">Oops, No previous item found</string>
+    <string name="start_browsing_and_leave_this_on_us">Start browsing and leave this on us</string>
 </resources>
