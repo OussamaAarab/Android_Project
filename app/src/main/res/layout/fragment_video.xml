@@ -73,10 +73,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_popular_movies_week_trailers"
                     android:layout_width="match_parent"
-                    android:layout_height="230dp"
+                    android:layout_height="170dp"
                     android:paddingBottom="0dp" />
-                    android:layout_height="200dp"
-                    android:paddingBottom="5dp" />
 
 
             </LinearLayout>
@@ -125,7 +123,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/latest_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="170dp"
                     android:paddingBottom="5dp" />
 
 
@@ -175,7 +173,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/upcoming_rv"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="170dp"
                     android:paddingBottom="5dp" />
 
 
@@ -228,7 +226,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_popular_movies"
                     android:layout_width="match_parent"
-                    android:layout_height="230dp"
+                    android:layout_height="170dp"
                     android:paddingBottom="5dp"
                     />
 
@@ -279,7 +277,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_horror_movie"
                     android:layout_width="match_parent"
-                    android:layout_height="230dp"
+                    android:layout_height="170dp"
                     android:paddingBottom="5dp"
                     />
 
@@ -330,7 +328,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_action_movie"
                     android:layout_width="match_parent"
-                    android:layout_height="230dp"
+                    android:layout_height="170dp"
                     android:paddingBottom="5dp"
                     />
 
@@ -380,7 +378,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_comedy_movie"
                     android:layout_width="match_parent"
-                    android:layout_height="230dp"
+                    android:layout_height="170dp"
                     android:paddingBottom="5dp"
                     />
 
@@ -432,7 +430,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_drama_movie"
                     android:layout_width="match_parent"
-                    android:layout_height="230dp"
+                    android:layout_height="170dp"
                     android:paddingBottom="5dp"
                     />
 
@@ -485,7 +483,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_romance_movie"
                     android:layout_width="match_parent"
-                    android:layout_height="230dp"
+                    android:layout_height="170dp"
                     android:paddingBottom="5dp"
                     />
 

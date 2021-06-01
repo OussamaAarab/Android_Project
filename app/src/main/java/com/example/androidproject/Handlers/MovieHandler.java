@@ -10,6 +10,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 
+import com.example.androidproject.Fragment.ProfilFragment;
 import com.example.androidproject.Fragment.SecondActivity;
 
 import com.example.androidproject.Fragment.VideoFragment;
@@ -17,6 +18,7 @@ import com.example.androidproject.Fragment.VideoFragment;
 import com.example.androidproject.Fragment.VideoPlayerActivity;
 import com.example.androidproject.HomeAdapter.AdapterMovies;
 import com.example.androidproject.Fragment.HomeFragment;
+import com.example.androidproject.HomeAdapter.MovieSearchAdapter;
 import com.example.androidproject.HomeAdapter.SlideAdapter;
 import com.example.androidproject.HomeAdapter.TrailerAdapter;
 import com.example.beans.Movie;
@@ -128,6 +130,13 @@ public class MovieHandler extends Handler {
             ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
             TrailerAdapter adapter = (TrailerAdapter) objMovie.get("AdapterMovies");
             adapter.setData(movies);
+
+        }
+        if (msg.arg1 == ProfilFragment.MSG_Last_Visited) {
+            HashMap<String, Object> objMovie = (HashMap<String, Object>) msg.obj;
+            ArrayList<Movie> movies = (ArrayList<Movie>) objMovie.get("MoviesList");
+            MovieSearchAdapter adapter = (MovieSearchAdapter) objMovie.get("AdapterMovies");
+            adapter.SetData(movies);
 
         }
 

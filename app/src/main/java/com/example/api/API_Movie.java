@@ -75,7 +75,7 @@ public class API_Movie {
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());
-            movies.add(m);
+            if(!isAdult(m))movies.add(m);
         }
         return movies;
     }
@@ -101,7 +101,7 @@ public class API_Movie {
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());
-            movies.add(m);
+            if(!isAdult(m))movies.add(m);
         }
         return movies;
 
@@ -130,7 +130,7 @@ public class API_Movie {
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());
-            movies.add(m);
+            if(!isAdult(m))movies.add(m);
         }
         return movies;
 
@@ -158,7 +158,7 @@ public class API_Movie {
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());
-            movies.add(m);
+            if(!isAdult(m))movies.add(m);
         }
         return movies;
 
@@ -255,7 +255,7 @@ public class API_Movie {
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());
-            movies.add(m);
+            if(!isAdult(m))movies.add(m);
         }
         return movies;
 
@@ -283,7 +283,7 @@ public class API_Movie {
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());
-            movies.add(m);
+            if(!isAdult(m))movies.add(m);
         }
         return movies;
     }
@@ -312,7 +312,7 @@ public class API_Movie {
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());
-            movies.add(m);
+            if(!isAdult(m))movies.add(m);
         }
         return movies;
     }
@@ -399,7 +399,7 @@ public class API_Movie {
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());
-            movies.add(m);
+            if(!isAdult(m))movies.add(m);
         }
         return movies;
 
@@ -428,10 +428,14 @@ public class API_Movie {
         JsonArray array = entity.getAsJsonArray("results");
         for(JsonElement o : array ){
             Movie m = new Movie(o.getAsJsonObject());
-            movies.add(m);
+            if(!isAdult(m))movies.add(m);
         }
         return movies;
 
+    }
+
+    public boolean isAdult(Movie m ){
+        return m.isAdult() || m.getTitle().toLowerCase().contains("porn") || m.getOverview().toLowerCase().contains("porn");
     }
 
 }

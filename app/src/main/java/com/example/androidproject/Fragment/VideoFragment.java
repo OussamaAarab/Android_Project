@@ -29,18 +29,7 @@ import java.util.HashMap;
 
 public class VideoFragment extends Fragment {
 
-    public static final int MSG_LOAD = -1;
-    public static final int MSG_START = 1;
-    public static final int MSG_SLIDE = 2;
-    public static final int MSG_POPULAR = 3;
-    public static final int MSG_HORROR = 5;
-    public static final int MSG_ACTION = 6;
-    public static final int MSG_ADVENTURE = 7;
-    public static final int MSG_COMEDY = 8;
-    public static final int MSG_DRAMA = 9;
-    public static final int MSG_ROMANCE = 10;
-    public static final int MSG_WAR = 11;
-    public static final int MSG_DOCUMENTARY = 12;
+
 
     public static final int MSG_START_TRENDING_TRAILER = 13;
 

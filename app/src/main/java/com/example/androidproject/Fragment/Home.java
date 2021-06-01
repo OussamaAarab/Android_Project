@@ -106,5 +106,12 @@ public class Home extends AppCompatActivity implements MovieSearchAdapter.ItemCl
 
     }
 
+    @Override
+    public void onBackPressed() {
+        activeFragment = homeFragment;
+        super.onBackPressed();
+
+
+    }
 }
 
