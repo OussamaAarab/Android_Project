@@ -17,7 +17,7 @@ public class API_Factory {
     private API_Factory(String API_KEY,String image_source){
         this.API_KEY = API_KEY;
         this.image_source = image_source;
-        lang = Locale.getDefault().getLanguage();
+        lang = "ang";
     }
     public static API_Factory getInstance(Context context) throws Exception {
         if(factory==null){

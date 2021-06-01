@@ -40,7 +40,6 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-
 public class MainActivity extends AppCompatActivity {
 
     ImageView logo;
